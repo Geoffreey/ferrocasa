@@ -2,7 +2,7 @@
 define('INSTALLED', true);
 
 	$sql_details = array(
-'host' => 'www.ferrocasa.tld',
+'host' => 'localhost',
 'db' => 'pos_moderno',
 'user' => 'root',
 'pass' => '',

@@ -1,6 +1,6 @@
 <?php
 /*   __________________________________________________________
-$timezone = 'America/Guatemala';
+$timezone = 'America/Lima';
     |    Web: http://geoffdeep.pw, E-mail: info@geoffdeep.pw   |
     |__________________________________________________________|
 */
