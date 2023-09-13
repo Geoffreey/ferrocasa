@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -425,7 +425,7 @@ if (isset($request->get['action_type']) AND $request->get['action_type'] == 'INV
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -460,10 +460,10 @@ if (isset($request->get['customer_id']) && ($request->get['customer_id'] != 'und
     $where_query .= " AND selling_info.customer_id = {$customer_id}";
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT selling_info.* FROM `selling_info` WHERE {$where_query}) as selling_info";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 $columns = array(
@@ -601,6 +601,6 @@ $Hooks->do_action('After_Showing_Invoice_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

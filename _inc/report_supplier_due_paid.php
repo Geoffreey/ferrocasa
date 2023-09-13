@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -70,7 +70,7 @@ if ($request->server['REQUEST_METHOD'] == 'GET' && isset($request->get['invoice_
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -80,12 +80,12 @@ $from = from();
 $to = to();
 $where_query .= date_range_purchase_payments_filter($from, $to);
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT purchase_payments.* FROM purchase_payments 
   LEFT JOIN purchase_price ON (purchase_payments.invoice_id = purchase_price.invoice_id) 
   WHERE $where_query) as customers";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -127,6 +127,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

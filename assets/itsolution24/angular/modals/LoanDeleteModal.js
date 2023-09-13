@@ -69,7 +69,7 @@ window.angularApp.factory("LoanDeleteModal", ["API_URL", "window", "jQuery", "$h
                             $(document).find(".close").trigger("click");
                         });
 
-                        // Callback
+                        // Devolver la llamada
                         if ($scope.LoanDeleteModalCallback) {
                             $scope.LoanDeleteModalCallback($scope);
                         }

@@ -526,7 +526,7 @@ $.extend( AutoFill.prototype, {
 				'hover';
 
 		// All event listeners attached here are removed in the `destroy`
-		// callback in the constructor
+		// Devolver la llamada in the constructor
 		if ( focus === 'focus' ) {
 			dt
 				.on( 'key-focus.autoFill', function ( e, dt, cell ) {

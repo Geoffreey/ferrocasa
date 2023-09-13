@@ -102,14 +102,14 @@ define('INSTALLED', true);
 	 * SUSPENDER LA CUENTA DE USUARIO DURANTE UN PERÍODO ESPECÍFICO, SI SE PRODUJERON ERRORES EN LOS INTENTOS DE INICIO DE SESIÓN
 	 *-----------------------------------------------------------------------------
 	 */
-	define('TOTAL_LOGIN_TRY', 120);
+	define('TOTAL_LOGIN_TRY', 10);
 
 	/*
 	 * --------------------------------------------------------------------
 	 * SI LA CUENTA ESTÁ BLOQUEADA, DESBLOQUEE DESPUÉS DEL TIEMPO ESPECIFICADO (MINUTOS)
 	 *---------------------------------------------------------------------
 	 */
-	define('UNLOCK_ACCOUNT_AFTER', 120);
+	define('UNLOCK_ACCOUNT_AFTER', 10);
 
 	/*
 	 * --------------------------------------------------------------------

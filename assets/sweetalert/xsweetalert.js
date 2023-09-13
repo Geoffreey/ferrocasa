@@ -983,7 +983,7 @@ exports.default = sweetAlert = _swal = function swal() {
       params.confirmButtonText = params.showCancelButton ? 'Confirm' : _defaultParams2.default.confirmButtonText;
       params.confirmButtonText = argumentOrDefault('confirmButtonText');
 
-      // Callback function when clicking on "OK"/"Cancel"
+      // Devolver la llamada function when clicking on "OK"/"Cancel"
       params.doneFunction = arguments[1] || null;
 
       break;

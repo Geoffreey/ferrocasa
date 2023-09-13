@@ -9,7 +9,7 @@
 | -----------------------------------------------------
 | DERECHOS RESERVADOS POR geoffdeep.pw
 | -----------------------------------------------------
-| WEBSITE:      http://geoffdeep.pw
+| WEBSITE:      http://web.geoffdeep.pw
 | -----------------------------------------------------
 */
 include("_init.php");
@@ -346,7 +346,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && $request->get['action_type']
       <?php endif; ?>
     </div>
     <div class="copyright text-center">
-      <p>&copy; <a href="https://wa.link/gas26m">Soporte técnico</a>, </p>
+      <p>&copy; <a href="https://wa.link/gas26m">Servicio tecnico</a>, </p>
     </div>
   </section>
 

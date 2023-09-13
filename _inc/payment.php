@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -15,7 +15,7 @@ if (!is_loggedin()) {
 $store_id = store_id();
 $user_id = user_id();
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
 
@@ -24,7 +24,7 @@ function validate_request_data($request)
      throw new Exception(trans('error_invoice_id'));
   }
 
-  // Validate Customer ID
+  // Validar identificación del cliente
   if (!validateString($request->post['customer-id'])) {
     throw new Exception(trans('error_customer_id'));
   }
@@ -43,7 +43,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && $request->get['action_type']
       throw new Exception(trans('error_payment_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     $invoice_model = registry()->get('loader')->model('invoice');

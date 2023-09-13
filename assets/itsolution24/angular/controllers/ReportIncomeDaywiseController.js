@@ -74,21 +74,21 @@ function (
         "footerCallback": function ( row, data, start, end, display ) {
             var pageTotal;
             var api = this.api();
-            // Remove the formatting to get integer data for summation
+            // Elimine el formato para obtener datos enteros para la suma
             var intVal = function ( i ) {
                 return typeof i === "string" ?
                     i.replace(/[\$,]/g, "")*1 :
                     typeof i === "number" ?
                         i : 0;
             };
-            // Total over all pages at column 2
+            // Total de todas las páginas en la columna 2
             pageTotal = api
                 .column( 2, { page: "current"} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 2 ).footer() ).html(
                 window.formatDecimal(pageTotal, 2)
             );
@@ -102,6 +102,6 @@ function (
     $(".dt-buttons").remove();
 
     //================
-    // End datatable
+    // Finalizar tabla de datos
     //================
 }]);

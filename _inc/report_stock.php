@@ -34,14 +34,14 @@ if ($sup_id) {
 // Datatable start
 //===========================
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT products.p_id, products.p_name, p2s.store_id, p2s.sup_id, p2s.quantity_in_stock, p2s.sell_price as sell_price, p2s.purchase_price as purchase_price FROM products 
   LEFT JOIN product_to_store p2s ON (products.p_id = p2s.product_id)
   WHERE $where_query
   GROUP BY products.p_id, p2s.sup_id
   ORDER BY p2s.sup_id ASC) as products";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'p_id';
 
 // indexes
@@ -97,6 +97,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

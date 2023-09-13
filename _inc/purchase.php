@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -18,7 +18,7 @@ $user_id = user_id();
 // LOAD INVOICE MODEL
 $invoice_model = registry()->get('loader')->model('purchase');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {    
     // Validate date
@@ -36,12 +36,12 @@ function validate_request_data($request)
       throw new Exception(trans('error_reference_no'));
     }
 
-    // Validate status
+    // Validar estado
     if (!isset($request->post['sup_id']) || !validateInteger($request->post['sup_id'])) {
       throw new Exception(trans('error_sup_id'));
     }
 
-    // Validate status
+    // Validar estado
     if (empty($request->post['status'])) {
       throw new Exception(trans('error_status'));
     }
@@ -118,7 +118,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate invoice items
@@ -365,7 +365,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_purchase_invoice')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -664,7 +664,7 @@ if (isset($request->get['invoice_id']) && isset($request->get['action_type']) &&
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -705,12 +705,12 @@ if (isset($request->get['type']) && ($request->get['type'] != 'undefined') && $r
   $where_query .= date_range_filter2($from, $to);
  }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT purchase_info.*, purchase_price.payable_amount, purchase_price.paid_amount, purchase_price.due FROM `purchase_info` 
   LEFT JOIN `purchase_price` ON (purchase_info.invoice_id = purchase_price.invoice_id) 
   WHERE $where_query) as purchase_info";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 $columns = array(
@@ -846,6 +846,6 @@ $Hooks->do_action('After_Showing_Purchase_Invoice_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

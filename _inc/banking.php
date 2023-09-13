@@ -34,7 +34,7 @@ function validate_withdraw_post_data($request)
     throw new Exception(trans('error_title'));
   }
 
-  // Validate amount
+  // Validar importe
   if (!validateFloat($request->post['amount'])) {
     throw new Exception(trans('error_amount'));
   }
@@ -128,7 +128,7 @@ function validate_deposit_post_data($request)
     throw new Exception(trans('error_about'));
   }
 
-  // Validate amount
+  // Validar importe
   if (!validateFloat($request->post['amount'])) {
     throw new Exception(trans('error_amount'));
   }
@@ -203,7 +203,7 @@ function validate_transfer_post_data($request)
     throw new Exception(trans('error_about'));
   }
 
-  // Validate amount
+  // Validar importe
   if (!validateFloat($request->post['amount'])) {
     throw new Exception(trans('error_amount'));
   }
@@ -356,7 +356,7 @@ if (isset($request->get['action_type']) && $request->get['action_type'] == 'VIEW
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -373,13 +373,13 @@ if (isset($request->get['account_id']) && $request->get['account_id'] != 'null')
   $account_id = $request->get['account_id'];
   $where_query .= " AND bank_transaction_info.account_id = $account_id";
 }
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT bank_transaction_info.*, bank_transaction_price.price_id, bank_transaction_price.amount 
   FROM bank_transaction_info 
   LEFT JOIN bank_transaction_price ON bank_transaction_info.info_id = bank_transaction_price.info_id
   WHERE $where_query) as bank_transaction_info";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 // Indexes
@@ -489,7 +489,7 @@ $Hooks->do_action('After_Showing_Bank_Transaction_list');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */
  

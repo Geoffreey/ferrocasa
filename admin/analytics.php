@@ -69,8 +69,8 @@ include ("left_sidebar.php");
 
     <div class="row">
       <div class="col-md-3 col-sm-3 col-xs-12">
-        <?php include('../_inc/template/partials/top_products.php'); ?>
-      </div> 
+         <?php include('../_inc/template/partials/top_products.php'); ?>
+      </div>
       <div class="col-md-3 col-sm-3 col-xs-12">
         <?php include('../_inc/template/partials/top_customers.php'); ?>
       </div> 
@@ -91,7 +91,7 @@ include ("left_sidebar.php");
           <a href="report_cashbook.php"><?php echo trans('button_details');?> &rarr;</a>
         </div>
       </div>
-      <div class="col-md-5"">
+      <div class="col-md-5">
         <?php include ROOT.'/_inc/template/partials/progress_group.php';?>
       </div>
     </div>
@@ -113,10 +113,10 @@ include ("left_sidebar.php");
                       <a href="#birthday_today" data-toggle="tab" aria-expanded="false">
                       <?php echo trans('text_birthday_today'); ?>
                     </a>
-                    <!--<li>-->
-                    <!--  <a href="#birthday_coming" data-toggle="tab" aria-expanded="false">-->
-                    <!--  <?php echo trans('text_birthday_coming'); ?>-->
-                    <!--</a>-->
+                    <li>
+                     <a href="#birthday_coming" data-toggle="tab" aria-expanded="false">
+                      <?php echo trans('text_birthday_coming'); ?>
+                    </a>
                   </li>
                 </ul>
                 <div class="tab-content" style="height:215px;overflow-y:scroll;">
@@ -150,13 +150,14 @@ include ("left_sidebar.php");
                       </table>
                     </div>
                   </div>
-                  <!--<div class="tab-pane" id="birthday_coming">-->
-                  <!--    <p class="text-red">This feature is unavailable!</p>-->
-                  <!--</div>-->
+                  <div class="tab-pane" id="birthday_coming">
+                  
+                <p class="text-red">This feature is unavailable!</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6"">
+            <div class="col-md-6">
               <div id="best-customer" class="small-box bg-info" style="box-shadow:none;">
                 <div class="inner">
                   <h3 class="title">

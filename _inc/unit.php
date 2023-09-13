@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_unit')) {
 // LOAD BOX MODEL
 $unit_model = registry()->get('loader')->model('unit');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) {
 
   // Unit name validation
@@ -37,7 +37,7 @@ function validate_request_data($request) {
       throw new Exception(trans('error_code_name'));
   }
 
-  // Store validation
+  // Validación de la tienda
   if (!isset($request->post['unit_store']) || empty($request->post['unit_store'])) {
     throw new Exception(trans('error_store'));
   }
@@ -76,7 +76,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -110,7 +110,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_unit')) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -122,7 +122,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 
     $id = $request->post['unit_id'];
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -152,7 +152,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) && $request->post['action_type'] == 'DELETE') {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_unit')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -238,7 +238,7 @@ if (isset($request->get['unit_id']) AND isset($request->get['action_type']) && $
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -246,13 +246,13 @@ $Hooks->do_action('Before_Showing_Unit_List');
 
 $where_query = 'unit2s.store_id = ' . store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT units.*, unit2s.status, unit2s.sort_order FROM units 
   LEFT JOIN unit_to_store unit2s ON (units.unit_id = unit2s.uunit_id) 
   WHERE $where_query GROUP by units.unit_id
   ) as units";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'unit_id';
 $columns = array(
   array(
@@ -317,6 +317,6 @@ $Hooks->do_action('After_Showing_Unit_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

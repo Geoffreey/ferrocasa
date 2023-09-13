@@ -128,7 +128,10 @@ include ("left_sidebar.php");
 					                  		<?php echo total_trash_product(); ?>
 					                  	</i>
 					                </a>
+									
 				                </div>
+
+								
 
 				                <!-- Bulk Action -->
 			                	<?php if (user_group_id() == 1 || has_permission('access', 'product_bulk_action')) : ?>
@@ -146,7 +149,7 @@ include ("left_sidebar.php");
 						                    </li>
 						                    <?php if(isset($request->get['location']) && $request->get['location'] == 'trash') : ?>
 						                    <li>
-						                    	<a id="restore-all" href="#" data-form="#product-list-form" data-datatable="product-product-list" data-loading-text="Restoring...">
+						                    	<a id="restore-all" href="#" data-form="#product-list-form" data-datatable="product-product-list"  data-loading-text="Restoring...">
 						                      		<?php echo trans('button_restore_all'); ?>
 						                    	</a>
 						                    </li>
@@ -163,7 +166,7 @@ include ("left_sidebar.php");
 						<div class="box-body">
 							<div class="table-responsive">
 								<?php
-									$print_columns = '2,3,4,5,6,7';
+									$print_columns = '2,3,4,5,6,7,8';
 									if (user_group_id() != 1) {
 										if (! has_permission('access', 'show_purchase_price')) {
 											$print_columns = str_replace('6,', '', $print_columns);
@@ -178,24 +181,24 @@ include ("left_sidebar.php");
 											$hide_colums .= "6,";
 										}
 										if (! has_permission('access', 'read_product')) {
-											$hide_colums .= "8,";
-										}
-										if (! has_permission('access', 'update_product')) {
 											$hide_colums .= "9,";
 										}
-										if (! has_permission('access', 'create_purchase_invoice')) {
+										if (! has_permission('access', 'update_product')) {
 											$hide_colums .= "10,";
 										}
-										if (! has_permission('access', 'print_barcode')) {
+										if (! has_permission('access', 'create_purchase_invoice')) {
 											$hide_colums .= "11,";
 										}
-										if (! has_permission('access', 'delete_product')) {
+										if (! has_permission('access', 'print_barcode')) {
 											$hide_colums .= "12,";
+										}
+										if (! has_permission('access', 'delete_product')) {
+											$hide_colums .= "13,";
 										}
 									}
 
 								?>  
-								<table id="product-product-list" class="table table-bordered table-striped table-hover" data-hide-colums="<?php echo $hide_colums; ?>" data-print-columns="<?php echo $print_columns;?>">
+								<table id="product-product-list" class="table table-bordered table-striped table-hover" id="category-category-list" data-hide-colums="<?php echo $hide_colums; ?>" data-print-columns="<?php echo $print_columns;?>">
 								    <thead>
 								        <tr class="bg-gray">
 								            <th class="w-5 product-head text-center">
@@ -221,6 +224,9 @@ include ("left_sidebar.php");
 								            </th>                        
 								            <th class="w-5">
 								            	<?php echo trans('label_selling_price'); ?>
+								            </th>
+											<th class="w-5">
+								            	<?php echo trans('label_category'); ?>
 								            </th>
 								            <th class="w-5">
 								            	<?php echo trans('label_view'); ?>
@@ -264,6 +270,9 @@ include ("left_sidebar.php");
 								            </th>                        
 								            <th class="w-5">
 								            	<?php echo trans('label_selling_price'); ?>
+								            </th>
+											<th class="w-5">
+								            	<?php echo trans('label_category'); ?>
 								            </th>
 								            <th class="w-5">
 								            	<?php echo trans('label_view'); ?>

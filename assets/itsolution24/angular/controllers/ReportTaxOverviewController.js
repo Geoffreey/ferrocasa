@@ -94,7 +94,7 @@ function (
             var total;
             var pageTotal;
             var api = this.api();
-            // Remove the formatting to get integer data for summation
+            // Elimine el formato para obtener datos enteros para la suma
             var intVal = function ( i ) {
                 return typeof i === "string" ?
                     i.replace(/[\$,]/g, "")*1 :
@@ -102,50 +102,50 @@ function (
                         i : 0;
             };
             
-            // Total over this page
+            // Total en esta página
             pageTotal = api
                 .column( 1, { page: "current"} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 1 ).footer() ).html(
                 formatDecimal(pageTotal, 2)
             );
 
-             // Total over this page
+             // Total en esta página
             pageTotal = api
                 .column( 2, { page: "current"} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 2 ).footer() ).html(
                 formatDecimal(pageTotal, 2)
             );
 
-             // Total over this page
+             // Total en esta página
             pageTotal = api
                 .column( 3, { page: "current"} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 3 ).footer() ).html(
                 formatDecimal(pageTotal, 2)
             );
 
-            // Total over this page
+            // Total en esta página
             pageTotal = api
                 .column( 4, { page: "current"} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 4 ).footer() ).html(
                 formatDecimal(pageTotal, 2)
             );
@@ -217,22 +217,22 @@ function (
                     doc.defaultStyle.fontSize = 8;
                     doc.styles.tableHeader.fontSize = 8;doc.styles.tableHeader.alignment = "left";
                     doc.styles.title.fontSize = 10;
-                    // Remove spaces around page title
+                    // Eliminar espacios alrededor del título de la página
                     doc.content[0].text = doc.content[0].text.trim();
-                    // Header
+                    // Encabezado
                     doc.content.splice( 1, 0, {
                         margin: [ 0, 0, 0, 12 ],
                         alignment: 'center',
                         fontSize: 8,
                         text: 'Printed on: '+window.formatDate(new Date()),
                     });
-                    // Create a footer
+                    // Crear un pie de página
                     doc['footer']=(function(page, pages) {
                         return {
                             columns: [
                                 'Powered by web.ferrocasa.pw',
                                 {
-                                    // This is the right column
+                                    // Esta es la columna de la derecha
                                     alignment: 'right',
                                     text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }]
                                 }
@@ -240,21 +240,21 @@ function (
                             margin: [10, 0]
                         };
                     });
-                    // Styling the table: create style object
+                    // Esta es la columna de la derecha
                     var objLayout = {};
-                    // Horizontal line thickness
+                    // Grosor de la línea horizontal
                     objLayout['hLineWidth'] = function(i) { return 0.5; };
-                    // Vertikal line thickness
+                    // Grosor de la línea vertical
                     objLayout['vLineWidth'] = function(i) { return 0.5; };
-                    // Horizontal line color
+                    // Color de línea horizontal
                     objLayout['hLineColor'] = function(i) { return '#aaa'; };
-                    // Vertical line color
+                    // Color de línea vertical
                     objLayout['vLineColor'] = function(i) { return '#aaa'; };
-                    // Left padding of the cell
+                    // Relleno izquierdo de la celda.
                     objLayout['paddingLeft'] = function(i) { return 4; };
-                    // Right padding of the cell
+                    // Relleno derecho de la celda.
                     objLayout['paddingRight'] = function(i) { return 4; };
-                    // Inject the object in the document
+                    // Inyectar el objeto en el documento.
                     doc.content[1].layout = objLayout;
                 }
             }
@@ -262,6 +262,6 @@ function (
     });
 
     //==============
-    // End datatable
+    // Finalizar tabla de datos
     //==============
 }]);

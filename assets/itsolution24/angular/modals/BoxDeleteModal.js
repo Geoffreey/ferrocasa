@@ -69,7 +69,7 @@ window.angularApp.factory("BoxDeleteModal", ["API_URL", "window", "jQuery", "$ht
                             $(document).find(".close").trigger("click");
                         });
 
-                        // Callback
+                        // Devolver la llamada
                         if ($scope.BoxDeleteModalCallback) {
                             $scope.BoxDeleteModalCallback($scope);
                         }

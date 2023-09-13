@@ -3,8 +3,8 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
-// If user is not logged in then an alert message
+// Comprobar si el usuario inició sesión o no
+// Si el usuario no ha iniciado sesión, aparece un mensaje de alerta
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -13,7 +13,7 @@ if (!is_loggedin()) {
 }
 
 // Comprobar, si el usuario tiene permiso de lectura o no
-// If user have not reading permission an alert message
+// Si el usuario no tiene permiso de lectura, aparece un mensaje de alerta
 if (user_group_id() != 1 && !has_permission('access', 'read_expense_category')) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_expense_category')) 
 // LOAD CATEGORY MODEL
 $expense_category_model = registry()->get('loader')->model('expensecategory');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate expense_category name
@@ -53,7 +53,7 @@ function validate_existance($request, $category_id = 0)
 {
   
 
-  // Check email address, if exist or not?
+  // Comprobar la dirección de correo electrónico, ¿si existe o no?
   if (!empty($request->post['category_slug'])) {
     $statement = db()->prepare("SELECT * FROM `expense_categorys` WHERE `category_slug` = ? AND `category_id` != ?");
     $statement->execute(array($request->post['category_slug'], $category_id));
@@ -73,10 +73,10 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
     
-    // Validte existance
+    // validar existencia
     validate_existance($request);
 
     $Hooks->do_action('Before_Create_Expense_Category');
@@ -107,22 +107,22 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_expense_category')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (empty($request->post['category_id'])) {
       throw new Exception(trans('error_id'));
     }
 
     $category_id = $request->post['category_id'];
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
-    // Validte existance
+    // validar existencia
     validate_existance($request, $category_id);
 
     $Hooks->do_action('Before_Update_Expense_Category', $request);
@@ -150,7 +150,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_expense_category')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -173,7 +173,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 
     $new_category_id = $request->post['new_category_id'];
 
-    // Validte delete action
+    // validar la acción de eliminación
     if (empty($request->post['delete_action'])) {
       throw new Exception(trans('error_delete_action'));
     }
@@ -285,7 +285,7 @@ if (isset($request->get['category_id']) AND isset($request->get['action_type']) 
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -293,12 +293,12 @@ $Hooks->do_action('Before_Showing_Expense_Category_List');
 
 $where_query = 'is_hide != 1';
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT * FROM expense_categorys 
   WHERE $where_query GROUP by category_id
   ) as expense_categorys";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'category_id';
 
 $columns = array(
@@ -378,6 +378,6 @@ $Hooks->do_action('After_Showing_Expense_Category_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

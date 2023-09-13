@@ -59,7 +59,7 @@ function (
     });
 
 
-    // Edit Customer
+    // Editar cliente
     $scope.CustomerEditModalCallback = function($res)
     {
         $("#customer_id").append("<option value='"+$res.customer_id+"' selected>"+$res.customer_name+"</option>");

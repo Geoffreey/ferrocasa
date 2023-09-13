@@ -3,8 +3,8 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
-// If user is not logged in then an alert message
+// Comprobar si el usuario inició sesión o no
+// Si el usuario no ha iniciado sesión, aparece un mensaje de alerta
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -13,7 +13,7 @@ if (!is_loggedin()) {
 }
 
 // Comprobar, si el usuario tiene permiso de lectura o no
-// If user have not reading permission an alert message
+// Si el usuario no tiene permiso de lectura, aparece un mensaje de alerta
 if (user_group_id() != 1 AND !has_permission('access', 'read_customer')) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -26,22 +26,22 @@ $customer_model = registry()->get('loader')->model('customer');
 $store_id = store_id();
 $user_id = user_id();
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
-  // Validate customer name
+  // Validar nombre del cliente
   if (!validateString($request->post['customer_name'])) {
     throw new Exception(trans('error_customer_name'));
   }
 
-  // Validate customer date of birth
+  // Validar fecha de nacimiento del cliente
  if ($request->post['dob']) {
     if (!isItValidDate($request->post['dob'])) {
         throw new Exception(trans('error_date_of_birth'));
     }
   }
 
-  // Validate customer email and mobile
+  // Validar correo electrónico y móvil del cliente
   if (!validateEmail($request->post['customer_email']) 
     AND (empty($request->post['customer_mobile']) 
       || !valdateMobilePhone($request->post['customer_mobile']))) {
@@ -49,39 +49,39 @@ function validate_request_data($request)
     throw new Exception(trans('error_customer_email_or_mobile'));
   }
 
-  // Validate customer sex
+  // Validar sexo del cliente
   if (!validateInteger($request->post['customer_sex'])) {
     throw new Exception(trans('error_customer_sex'));
   }
 
-  // Validate customer state
+  // Validar estado del cliente
   if (get_preference('invoice_view') == 'indian_gst') {
     if (!validateString($request->post['customer_state'])) {
       throw new Exception(trans('error_customer_state'));
     }
   }
 
-  // Store validation
+  // Validación de la tienda
   if (!isset($request->post['customer_store']) || empty($request->post['customer_store'])) {
     throw new Exception(trans('error_store'));
   }
 
-  // Validate status
+  // Validar estado
   if (!is_numeric($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
 
-  // Validate sort order
+  // Validar orden de clasificación
   if (!is_numeric($request->post['sort_order'])) {
     throw new Exception(trans('error_sort_order'));
   }
 }
 
-// Check customer existance by id
+// Verifica la existencia del cliente por id
 function validate_existance($request, $id = 0)
 {
   
-  // Check email address, if exist or not?
+  // Comprobar la dirección de correo electrónico, ¿si existe o no?
   if (!empty($request->post['customer_email'])) {
     $statement = db()->prepare("SELECT * FROM `customers` WHERE `customer_email` = ? AND `customer_id` != ?");
     $statement->execute(array($request->post['customer_email'], $id));
@@ -90,7 +90,7 @@ function validate_existance($request, $id = 0)
     }
   }
 
-  // Check Mobile phone, is exist?
+  // Comprobar teléfono móvil, ¿existe?
   if (!empty($request->post['customer_mobile'])) {
     $statement = db()->prepare("SELECT * FROM `customers` WHERE `customer_mobile` = ? AND `customer_id` != ?");
     $statement->execute(array($request->post['customer_mobile'], $id));
@@ -111,28 +111,28 @@ function add_customer_balance($customer_id, $amount, $pmethod_id,  $notes='')
   $statement->execute(array(store_id(), $customer_id));
 }
 
-// Create customer
+// crear cliente
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) AND $request->post['action_type'] == 'CREATE')
 {
   try {
 
-    // Create permission check
+    // Crear verificación de permisos
     if (user_group_id() != 1 AND !has_permission('access', 'create_customer')) {
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
     
-    // validte existance
+    // validar existencia
     validate_existance($request);
 
     $Hooks->do_action('Before_Create_Customer', $request);
 
-    // Insert new customer into databtase
+    // Insertar nuevo cliente en la base de datos
     $customer_id = $customer_model->addCustomer($request->post);
 
-    // Fetch customer info
+    // Obtener información del cliente
     $customer = $customer_model->getCustomer($customer_id);
     $contact = $customer['customer_mobile'] ? $customer['customer_mobile'] : $customer['customer_email'];
 
@@ -158,17 +158,17 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
   }
 }
 
-// Update customer
+// Actualizar cliente
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) AND $request->post['action_type'] == 'UPDATE')
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 AND !has_permission('access', 'update_customer')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (empty($request->post['customer_id'])) {
       throw new Exception(trans('error_customer_id'));
     }
@@ -179,15 +179,15 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
     //   throw new Exception(trans('error_update_permission'));
     // }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
-    // validte existance
+    // validar existencia
     validate_existance($request, $id);
 
     $Hooks->do_action('Before_Update_Customer', $request);
     
-    // Edit customer
+    // Editar cliente
     $customer_id = $customer_model->editCustomer($id, $request->post);
     $customer = $customer_model->getCustomer($customer_id);
 
@@ -206,17 +206,17 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
   }
 } 
 
-// Delete customer
+// eliminar cliente
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) AND $request->post['action_type'] == 'DELETE') 
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 AND !has_permission('access', 'delete_customer')) {
       throw new Exception(trans('error_delete_permission'));
     }
 
-    // Validate customer id
+    // Validar identificación del cliente
     if (empty($request->post['customer_id'])) {
       throw new Exception(trans('error_customer_id'));
     }
@@ -235,12 +235,12 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 
     $new_customer_id = $request->post['new_customer_id'];
 
-    // walking customer can not be deleted
+    // el cliente ambulante no se puede eliminar
     if ($request->post['customer_id'] == 1) {
       throw new Exception(trans('error_unable_to_delete'));
     }
 
-    // validte delete action
+    // validar la acción de eliminación
     if (empty($request->post['delete_action'])) {
       throw new Exception(trans('error_delete_action'));
     }
@@ -251,7 +251,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 
     $Hooks->do_action('Before_Delete_Customer', $request);
 
-    // replace customer with new
+    // reemplazar cliente con nuevo
     if ($request->post['delete_action'] == 'insert_to') {
       $customer_model->replaceWith($new_customer_id, $id);
     }
@@ -259,7 +259,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
     $statement = $db->prepare("UPDATE `customer_transactions` SET `customer_id` = ? WHERE `customer_id` = ?");
     $statement->execute(array($new_customer_id, $id));
 
-    // Delete customer
+    // eliminar cliente
     $customer = $customer_model->deleteCustomer($id);
 
     $Hooks->do_action('After_Delete_Customer', $customer);
@@ -277,23 +277,23 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
   }
 }
 
-// Substract balance
+// Restar saldo
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) AND $request->post['action_type'] == 'SUBSTRACTBALANCE')
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 AND !has_permission('access', 'substract_customer_balance')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate customer id
+    // Validar identificación del cliente
     $customer_id = $request->post['customer_id'];
     if (!validateInteger($customer_id)) {
       throw new Exception(trans('error_customer_id'));
     }
 
-    // Validate amount
+    // Validar importe
     $amount = $request->post['amount'];
     if (!is_numeric($amount)) {
       throw new Exception(trans('error_amount'));
@@ -326,29 +326,29 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
   }
 }
 
-// Add balance
+// Agregar saldo
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) AND $request->post['action_type'] == 'ADDBALANCE')
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 AND !has_permission('access', 'add_customer_balance')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate customer id
+    // Validar identificación del cliente
     $customer_id = $request->post['customer_id'];
     if (!validateInteger($customer_id)) {
       throw new Exception(trans('error_customer_id'));
     }
 
-    // Validate  pmethod id
+    // Validar ID del método p
     $pmethod_id = $request->post['pmethod_id'];
     if (!validateInteger($pmethod_id)) {
       throw new Exception(trans('error_pmethod_id'));
     }
 
-    // Validate amount
+    // Validar importe
     $amount = $request->post['amount'];
     if (!is_numeric($amount)) {
       throw new Exception(trans('error_amount'));
@@ -371,35 +371,35 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
   }
 }
 
-// Customer create form
+// Formulario de creación de cliente
 if (isset($request->get['action_type']) AND $request->get['action_type'] == 'CREATE') 
 {
   include 'template/customer_create_form.php';
   exit();
 }
 
-// Customer edit form
+// Formulario de edición del cliente
 if (isset($request->get['customer_id']) AND isset($request->get['action_type']) AND $request->get['action_type'] == 'EDIT') {
   $customer = $customer_model->getCustomer($request->get['customer_id']);
   include 'template/customer_form.php';
   exit();
 }
 
-// Customer delete form
+// Formulario de eliminación de clientes
 if (isset($request->get['customer_id']) AND isset($request->get['action_type']) AND $request->get['action_type'] == 'DELETE') {
   $customer = $customer_model->getCustomer($request->get['customer_id']);
   include 'template/customer_del_form.php';
   exit();
 }
 
-// Substract balance form
+//Reiniciar formulario de saldo
 if (isset($request->get['customer_id']) AND isset($request->get['action_type']) AND $request->get['action_type'] == 'SUBSTRACTBALANCE') {
   $customer = $customer_model->getCustomer($request->get['customer_id']);
   include 'template/customer_substract_balance_form.php';
   exit();
 }
 
-// Add balance form
+// Agregar formulario de saldo
 if (isset($request->get['customer_id']) AND isset($request->get['action_type']) AND $request->get['action_type'] == 'ADDBALANCE') {
   $customer = $customer_model->getCustomer($request->get['customer_id']);
   include 'template/customer_add_balance_form.php';
@@ -408,19 +408,19 @@ if (isset($request->get['customer_id']) AND isset($request->get['action_type']) 
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 $Hooks->do_action('Before_Showing_Customer_List');
 
 $where_query = "c2s.store_id = {$store_id}";
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT customers.*, c2s.balance, c2s.status, c2s.sort_order FROM customers 
   LEFT JOIN customer_to_store c2s ON (customers.customer_id = c2s.customer_id) 
   WHERE $where_query) as customers";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'customer_id';
 
 $columns = array(
@@ -441,6 +441,7 @@ $columns = array(
   ),
   array( 'db' => 'customer_email',  'dt' => 'customer_email' ),
   array( 'db' => 'customer_mobile',  'dt' => 'customer_mobile' ),
+  array( 'db' => 'customer_nit',  'dt' => 'customer_nit' ),
   array(
       'db'        => 'customer_sex',
       'dt'        => 'customer_sex',
@@ -536,6 +537,6 @@ $Hooks->do_action('After_Showing_Customer_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

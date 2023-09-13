@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -25,7 +25,7 @@ $customer_id = (int)$request->get['customer_id'];
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -54,13 +54,13 @@ if ($request->get['type'] != 'all_due' && $request->get['type'] != 'all_invoice'
     $to = to();
     $where_query .= date_range_filter($from, $to);
 }
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT selling_info.*, selling_price.previous_due, selling_price.payable_amount, selling_price.prev_due_paid, selling_price.paid_amount, selling_price.due, selling_price.balance 
   FROM selling_info 
   JOIN selling_price ON selling_info.invoice_id = selling_price.invoice_id
   WHERE $where_query) as selling_info";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 $columns = array(
@@ -192,6 +192,6 @@ $Hooks->do_action('After_Showing_Customer_Profile');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

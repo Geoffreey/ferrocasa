@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -23,7 +23,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_purchase_report')) {
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -37,13 +37,13 @@ if (from()) {
   $where_query .= date_range_filter2($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT purchase_info.info_id, purchase_info.invoice_id, purchase_info.created_at, purchase_item.item_purchase_price, purchase_item.item_selling_price, purchase_item.item_quantity, purchase_item.total_sell, purchase_item.return_quantity, purchase_item.status FROM purchase_info 
       LEFT JOIN purchase_item ON (purchase_info.invoice_id = purchase_item.invoice_id)
       WHERE $where_query
       ORDER BY purchase_item.item_quantity DESC) as purchase_info";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 $columns = array(
     array( 'db' => 'info_id', 'dt' => 'info_id' ),
@@ -124,6 +124,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

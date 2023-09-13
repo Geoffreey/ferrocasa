@@ -60,7 +60,7 @@ window.angularApp.factory("TaxrateCreateModal", ["API_URL", "window", "jQuery", 
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeTaxrateCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -82,7 +82,7 @@ window.angularApp.factory("TaxrateCreateModal", ["API_URL", "window", "jQuery", 
                                 taxrateCount.text(parseInt(taxrateCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.TaxrateCreateModalCallback) {
                                 $scope.TaxrateCreateModalCallback($scope);
                             }

@@ -4806,7 +4806,7 @@ $LuCoverage = ' . var_export($this->LuCoverage, true) . ';
 		$searchRange = $searchRange * 16;
 		$rangeShift = $numTables * 16 - $searchRange;
 
-		// Header
+		// Encabezado
 		if (_TTF_MAC_HEADER) {
 			$stm .= (pack("Nnnnn", 0x74727565, $numTables, $searchRange, $entrySelector, $rangeShift)); // Mac
 		} else {

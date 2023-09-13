@@ -4898,7 +4898,7 @@ window.angularApp.factory("BoxCreateModal", ["API_URL", "window", "jQuery", "$ht
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeBoxCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -4920,7 +4920,7 @@ window.angularApp.factory("BoxCreateModal", ["API_URL", "window", "jQuery", "$ht
                                 boxCount.text(parseInt(boxCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.BoxCreateModalCallback) {
                                 $scope.BoxCreateModalCallback($scope);
                             }
@@ -5026,7 +5026,7 @@ window.angularApp.factory("BoxDeleteModal", ["API_URL", "window", "jQuery", "$ht
                             $(document).find(".close").trigger("click");
                         });
 
-                        // Callback
+                        // Devolver la llamada
                         if ($scope.BoxDeleteModalCallback) {
                             $scope.BoxDeleteModalCallback($scope);
                         }
@@ -5234,7 +5234,7 @@ window.angularApp.factory("UnitCreateModal", ["API_URL", "window", "jQuery", "$h
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeUnitCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -5256,7 +5256,7 @@ window.angularApp.factory("UnitCreateModal", ["API_URL", "window", "jQuery", "$h
                                 unitCount.text(parseInt(unitCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.UnitCreateModalCallback) {
                                 $scope.UnitCreateModalCallback($scope);
                             }
@@ -5362,7 +5362,7 @@ window.angularApp.factory("UnitDeleteModal", ["API_URL", "window", "jQuery", "$h
                             $(document).find(".close").trigger("click");
                         });
 
-                        // Callback
+                        // Devolver la llamada
                         if ($scope.UnitDeleteModalCallback) {
                             $scope.UnitDeleteModalCallback($scope);
                         }
@@ -5570,7 +5570,7 @@ window.angularApp.factory("TaxrateCreateModal", ["API_URL", "window", "jQuery", 
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeTaxrateCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -5592,7 +5592,7 @@ window.angularApp.factory("TaxrateCreateModal", ["API_URL", "window", "jQuery", 
                                 taxrateCount.text(parseInt(taxrateCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.TaxrateCreateModalCallback) {
                                 $scope.TaxrateCreateModalCallback($scope);
                             }
@@ -5698,7 +5698,7 @@ window.angularApp.factory("TaxrateDeleteModal", ["API_URL", "window", "jQuery", 
                             $(document).find(".close").trigger("click");
                         });
 
-                        // Callback
+                        // Devolver la llamada
                         if ($scope.TaxrateDeleteModalCallback) {
                             $scope.TaxrateDeleteModalCallback($scope);
                         }
@@ -5906,7 +5906,7 @@ window.angularApp.factory("CategoryCreateModal", ["API_URL", "window", "jQuery",
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeCategoryCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -5927,7 +5927,7 @@ window.angularApp.factory("CategoryCreateModal", ["API_URL", "window", "jQuery",
                                 categoryCount.text(parseInt(categoryCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.CategoryCreateModalCallback) {
                                 $scope.CategoryCreateModalCallback($scope);
                             }
@@ -6370,11 +6370,11 @@ window.angularApp.factory("CustomerCreateModal", ["API_URL", "window", "jQuery",
                                 customerCount.text(parseInt(customerCount.text()) + 1);
                             }
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeCustomerCreateModal();
                             $(document).find(".close").trigger("click");
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.CustomerCreateModalCallback) {
                                 $scope.CustomerCreateModalCallback($scope);
                             }
@@ -6591,7 +6591,7 @@ window.angularApp.factory("CustomerEditModal", ["API_URL", "window", "jQuery", "
                                 $(datatable).DataTable().ajax.reload(null, false);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.CustomerEditModalCallback) {
                                 $scope.CustomerEditModalCallback($scope);
                             }
@@ -7066,7 +7066,7 @@ window.angularApp.factory("BankAccountCreateModal", ["API_URL", "window", "jQuer
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeBankAccountCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -7088,7 +7088,7 @@ window.angularApp.factory("BankAccountCreateModal", ["API_URL", "window", "jQuer
                                 taxrateCount.text(parseInt(taxrateCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.BankAccountCreateModalCallback) {
                                 $scope.BankAccountCreateModalCallback($scope);
                             }
@@ -7194,7 +7194,7 @@ window.angularApp.factory("BankAccountDeleteModal", ["API_URL", "window", "jQuer
                             $(document).find(".close").trigger("click");
                         });
 
-                        // Callback
+                        // Devolver la llamada
                         if ($scope.BankAccountDeleteModalCallback) {
                             $scope.BankAccountDeleteModalCallback($scope);
                         }
@@ -8244,7 +8244,7 @@ window.angularApp.factory("ProductCreateModal", ["API_URL", "window", "jQuery", 
                                 productCount.text(parseInt(productCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.ProductCreateModalCallback) {
                                 $scope.ProductCreateModalCallback($scope);
                             }
@@ -8521,7 +8521,7 @@ window.angularApp.factory("ProductEditModal", ["API_URL", "window", "jQuery", "$
                         .then(function (willDelete) {
                             if (willDelete) {
 
-                                // close modalwindow
+                                // Cerrar ventana modal
                                 $scope.closeProductEditModal();
                                 $(document).find(".close").trigger("click");
                                 $("body").removeClass("modal-open");
@@ -8949,7 +8949,7 @@ window.angularApp.factory("SupplierCreateModal", ["API_URL", "window", "jQuery",
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeSupplierCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -8970,7 +8970,7 @@ window.angularApp.factory("SupplierCreateModal", ["API_URL", "window", "jQuery",
                                 supplierCount.text(parseInt(supplierCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.SupplierCreateModalCallback) {
                                 $scope.SupplierCreateModalCallback($scope);
                             }
@@ -9280,7 +9280,7 @@ window.angularApp.factory("BrandCreateModal", ["API_URL", "window", "jQuery", "$
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeBrandCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -9301,7 +9301,7 @@ window.angularApp.factory("BrandCreateModal", ["API_URL", "window", "jQuery", "$
                                 brandCount.text(parseInt(brandCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.BrandCreateModalCallback) {
                                 $scope.BrandCreateModalCallback($scope);
                             }
@@ -9611,7 +9611,7 @@ window.angularApp.factory("UserCreateModal", ["API_URL", "window", "jQuery", "$h
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeUserCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -9632,7 +9632,7 @@ window.angularApp.factory("UserCreateModal", ["API_URL", "window", "jQuery", "$h
                                 userCount.text(parseInt(userCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.UserCreateModalCallback) {
                                 $scope.UserCreateModalCallback($scope);
                             }
@@ -9947,7 +9947,7 @@ window.angularApp.factory("UserGroupCreateModal", ["API_URL", "window", "jQuery"
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeUserGroupCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -9968,7 +9968,7 @@ window.angularApp.factory("UserGroupCreateModal", ["API_URL", "window", "jQuery"
                                 usergroupCount.text(parseInt(usergroupCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.UserGroupCreateModalCallback) {
                                 $scope.UserGroupCreateModalCallback($scope);
                             }
@@ -10377,7 +10377,7 @@ window.angularApp.factory("GiftcardCreateModal", ["API_URL", "window", "jQuery",
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeGiftcardCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -10399,7 +10399,7 @@ window.angularApp.factory("GiftcardCreateModal", ["API_URL", "window", "jQuery",
                                 giftcardCount.text(parseInt(giftcardCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.GiftcardCreateModalCallback) {
                                 $scope.GiftcardCreateModalCallback($scope);
                             }
@@ -13981,7 +13981,7 @@ function toggleFullScreenMode () {
     }
 }
 
-// Callback functions
+// Devolver la llamada functions
 function save_template_content_data(id, content) 
 {
 	var template_id = $("#"+id).data("id");
@@ -14011,7 +14011,7 @@ function save_template_content_data(id, content)
 	return true;
 }
 
-// Callback functions
+// Devolver la llamada functions
 function save_template_css_data(id, content) 
 {
 	var template_id = $("#"+id).data("id");

@@ -27,7 +27,7 @@ $banking_model = registry()->get('loader')->model('banking');
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -55,13 +55,13 @@ if (($from && ($to == false)) || ($from == $to)) {
 
 $where_query .= " AND bank_transaction_info.transaction_type IN ('transfer')";
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT bank_transaction_info.*, bank_transaction_price.amount 
   FROM bank_transaction_info 
   JOIN bank_transaction_price ON bank_transaction_info.info_id = bank_transaction_price.info_id
   WHERE $where_query) as bank_transaction_info";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 // Indexes
@@ -112,7 +112,7 @@ $Hooks->do_action('After_Showing_Bank_Transfer_list');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */
  

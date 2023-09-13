@@ -481,7 +481,7 @@ class Printer
         // Experimental column format printing
         // This feature is not yet complete and may produce unpredictable results.
         $this -> setLineSpacing(16); // 16-dot line spacing. This is the correct value on both TM-T20 and TM-U220
-        // Header and density code (0, 1, 32, 33) re-used for every line
+        // Encabezado and density code (0, 1, 32, 33) re-used for every line
         $densityCode = ($highDensityHorizontal ? 1 : 0) + ($highDensityVertical ? 32 : 0);
         $colFormatData = $img -> toColumnFormat($highDensityVertical);
         $header = Printer::dataHeader(array($img -> getWidth()), true);

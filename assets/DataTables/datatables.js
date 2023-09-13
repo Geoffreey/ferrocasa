@@ -26935,7 +26935,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     var registerImmediate;
 
     function setImmediate(callback) {
-      // Callback can either be a function or a string
+      // Devolver la llamada can either be a function or a string
       if (typeof callback !== "function") {
         callback = new Function("" + callback);
       }
@@ -65809,7 +65809,7 @@ this.pdfMake = this.pdfMake || {}; this.pdfMake.vfs = {
 		// Run the sort by calling a full redraw
 		_fnReDraw( settings );
 	
-		// callback used for async user interaction
+		// Devolver la llamada used for async user interaction
 		if ( typeof callback == 'function' ) {
 			callback( settings );
 		}
@@ -75652,7 +75652,7 @@ $.extend( AutoFill.prototype, {
 				'hover';
 
 		// All event listeners attached here are removed in the `destroy`
-		// callback in the constructor
+		// Devolver la llamada in the constructor
 		if ( focus === 'focus' ) {
 			dt
 				.on( 'key-focus.autoFill', function ( e, dt, cell ) {
@@ -87364,7 +87364,7 @@ $.extend( Responsive.prototype, {
 		var clonedHeader = $( dt.table().header().cloneNode( false ) ).appendTo( clonedTable );
 		var clonedBody   = $( dt.table().body() ).clone( false, false ).empty().appendTo( clonedTable ); // use jQuery because of IE8
 
-		// Header
+		// Encabezado
 		var headerCells = dt.columns()
 			.header()
 			.filter( function (idx) {

@@ -22,10 +22,11 @@ class Session
 			ini_set('session.use_only_cookies', 'On');
 			ini_set('session.use_trans_sid', 'On');
 			ini_set('session.cookie_httponly', 'On');
-			ini_set('session.cookie_lifeime', 'On');
+			ini_set('session.cookie_lifetime', 'On');
 			ini_set('session.cookie_domain', 'On');
 
-			session_set_cookie_params(60*60*24*14,'/');
+			session_set_cookie_params(60*60*24*14, '/');
+			
 			session_start();
 		}
 

@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_user')) {
 // LOAD USER MODEL
 $user_model = registry()->get('loader')->model('user');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validar nombre de usuario
@@ -32,7 +32,7 @@ function validate_request_data($request)
     throw new Exception(trans('error_user_name'));
   }
 
-  // Validate customer date of birth
+  // Validar fecha de nacimiento del cliente
   if ($request->post['dob']) {
     if (!isItValidDate($request->post['dob'])) {
         throw new Exception(trans('error_date_of_birth'));
@@ -53,12 +53,12 @@ function validate_request_data($request)
     throw new Exception(trans('error_store'));
   }
 
-  // Validate status
+  // Validar estado
   if (!is_numeric($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
 
-  // Validate sort order
+  // Validar orden de clasificación
   if (!is_numeric($request->post['sort_order'])) {
     throw new Exception(trans('error_sort_order'));
   }
@@ -98,7 +98,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_read_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
      // Validate existance
@@ -147,7 +147,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_user') || DEMO) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -163,7 +163,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -200,7 +200,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_user') || DEMO) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -305,22 +305,22 @@ if (isset($request->get['id']) && isset($request->get['action_type']) && $reques
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
 $Hooks->do_action('Before_Showing_User_List');
  
-// DB table to use
+// tabla de base de datos a utilizar
 $where_query = 'u2s.store_id = ' . store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT users.*, u2s.status, u2s.sort_order FROM users 
   LEFT JOIN user_to_store u2s ON (users.id = u2s.user_id) 
   WHERE $where_query GROUP by users.id
   ) as users";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -405,6 +405,6 @@ $Hooks->do_action('After_Showing_User_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

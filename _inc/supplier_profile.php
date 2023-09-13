@@ -30,7 +30,7 @@ $invoice_model = registry()->get('loader')->model('purchase');
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -59,12 +59,12 @@ $to = to();
 $where_query .= date_range_filter2($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT purchase_info.*, purchase_price.payable_amount, purchase_price.paid_amount, purchase_price.due FROM `purchase_info` 
   LEFT JOIN `purchase_price` ON (purchase_info.invoice_id = purchase_price.invoice_id) 
   WHERE $where_query) as purchase_info";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 $columns = array(
@@ -195,6 +195,6 @@ $Hooks->do_action('After_Showing_Supplier_Profile');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -18,7 +18,7 @@ $invoice_model = registry()->get('loader')->model('invoice');
 // Validate customer post data
 function validate_customer_data($request) 
 {
-  // Validate customer id
+  // Validar identificación del cliente
   if (!validateInteger($request->post['customer-id'])) {
     throw new Exception(trans('error_customer'));
   }
@@ -35,7 +35,7 @@ function validate_invoice_items($invoice_items)
   // Loop through produdt items for validation checking
   foreach ($invoice_items as $product) 
   {
-    // Validate product id
+    // Validar identificación del producto
     if (!validateInteger($product['item_id'])) {
       throw new Exception(trans('error_invalid_product'));
     }
@@ -96,7 +96,7 @@ function validate_existance($request)
 if ($request->server['REQUEST_METHOD'] == 'POST' AND $request->get['action_type'] == 'DELETE') {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_holding-order')) {
       throw new Exception(trans('error_delete_permission'));
     }

@@ -60,7 +60,7 @@ window.angularApp.factory("UserCreateModal", ["API_URL", "window", "jQuery", "$h
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeUserCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -81,7 +81,7 @@ window.angularApp.factory("UserCreateModal", ["API_URL", "window", "jQuery", "$h
                                 userCount.text(parseInt(userCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.UserCreateModalCallback) {
                                 $scope.UserCreateModalCallback($scope);
                             }

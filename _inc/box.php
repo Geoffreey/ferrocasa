@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_box')) {
 // LOAD BOX MODEL
 $box_model = registry()->get('loader')->model('box');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) {
 
   // box name validation
@@ -37,7 +37,7 @@ function validate_request_data($request) {
       throw new Exception(trans('error_code_name'));
   }
 
-  // Store validation
+  // Validación de la tienda
   if (!isset($request->post['box_store']) || empty($request->post['box_store'])) {
     throw new Exception(trans('error_store'));
   }
@@ -76,7 +76,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -110,7 +110,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_box')) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -122,7 +122,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 
     $id = $request->post['box_id'];
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -152,7 +152,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) && $request->post['action_type'] == 'DELETE') {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_box')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -246,7 +246,7 @@ if (isset($request->get['box_id']) AND isset($request->get['action_type']) && $r
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -254,13 +254,13 @@ $Hooks->do_action('Before_Showing_Box_List');
 
 $where_query = 'b2s.store_id = ' . store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT boxes.*, b2s.status, b2s.sort_order FROM boxes 
   LEFT JOIN box_to_store b2s ON (boxes.box_id = b2s.box_id) 
   WHERE $where_query GROUP by boxes.box_id
   ) as boxes";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'box_id';
 $columns = array(
   array(
@@ -325,6 +325,6 @@ $Hooks->do_action('After_Showing_Box_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

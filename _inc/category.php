@@ -3,8 +3,8 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
-// If user is not logged in then an alert message
+// Comprobar si el usuario inició sesión o no
+// Si el usuario no ha iniciado sesión, aparece un mensaje de alerta
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -13,7 +13,7 @@ if (!is_loggedin()) {
 }
 
 // Comprobar, si el usuario tiene permiso de lectura o no
-// If user have not reading permission an alert message
+// Si el usuario no tiene permiso de lectura, aparece un mensaje de alerta
 if (user_group_id() != 1 && !has_permission('access', 'read_category')) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_category')) {
 // LOAD CATEGORY MODEL
 $category_model = registry()->get('loader')->model('category');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate category name
@@ -58,7 +58,7 @@ function validate_existance($request, $category_id = 0)
 {
   
 
-  // Check email address, if exist or not?
+  // Comprobar la dirección de correo electrónico, ¿si existe o no?
   if (!empty($request->post['category_slug'])) {
     $statement = db()->prepare("SELECT * FROM `categorys` WHERE `category_slug` = ? AND `category_id` != ?");
     $statement->execute(array($request->post['category_slug'], $category_id));
@@ -68,7 +68,7 @@ function validate_existance($request, $category_id = 0)
   }
 }
 
-// Create category
+// Crear categoría
 if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_type']) && $request->post['action_type'] == 'CREATE')
 {
   try {
@@ -78,10 +78,10 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
     
-    // validte existance
+    // validar existencia
     validate_existance($request);
 
     $Hooks->do_action('Before_Create_Category', $request);
@@ -112,12 +112,12 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_category')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (empty($request->post['category_id'])) {
       throw new Exception(trans('error_category_id'));
     }
@@ -128,15 +128,15 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
-    // validte existance
+    // validar existencia
     validate_existance($request, $category_id);
 
     $Hooks->do_action('Before_Update_Category', $request);
     
-    // Edit category
+    // Editar categoria
     $category = $category_model->editCategory($category_id, $request->post);
 
     $Hooks->do_action('After_Update_Category', $category);
@@ -154,12 +154,12 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
   }
 } 
 
-// Delete category
+// Eliminar categoría
 if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_type']) && $request->post['action_type'] == 'DELETE') 
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_category')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -187,7 +187,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_delete_unable'));
     }
 
-    // validte delete action
+    // validar la acción de eliminación
     if (empty($request->post['delete_action'])) {
       throw new Exception(trans('error_delete_action'));
     }
@@ -202,7 +202,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       $category_model->replaceWith($new_category_id, $category_id);
     } 
 
-    // Delete category
+    // Eliminar categoría
     $category = $category_model->deleteCategory($category_id);
 
     $Hooks->do_action('After_Delete_Category', $category);
@@ -295,7 +295,7 @@ if (isset($request->get['category_id']) AND isset($request->get['action_type']) 
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -303,13 +303,13 @@ $Hooks->do_action('Before_Showing_Category_List');
 
 $where_query = 'c2s.store_id = ' . store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT categorys.*, c2s.status, c2s.sort_order FROM categorys 
   LEFT JOIN category_to_store c2s ON (categorys.category_id = c2s.ccategory_id) 
   WHERE $where_query GROUP by categorys.category_id
   ) as categorys";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'category_id';
 
 $columns = array(
@@ -395,6 +395,6 @@ $Hooks->do_action('After_Showing_Category_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

@@ -159,9 +159,12 @@ table#invoice-invoice-list td table td {
               <?php endif;?>
               <?php if ($customer['customer_mobile']) : ?>
               <p>
+              <?php endif;?>
+              <?php if ($customer['customer_nit']) : ?>
+              <p>
                 <b>
                   <?php echo trans('label_mobile_phone'); ?>:
-                </b> 
+                </b>
                 <?php echo $customer['customer_mobile']; ?>
               </p>
               <?php endif; ?>

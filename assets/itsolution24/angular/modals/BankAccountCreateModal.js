@@ -60,7 +60,7 @@ window.angularApp.factory("BankAccountCreateModal", ["API_URL", "window", "jQuer
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeBankAccountCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -82,7 +82,7 @@ window.angularApp.factory("BankAccountCreateModal", ["API_URL", "window", "jQuer
                                 taxrateCount.text(parseInt(taxrateCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.BankAccountCreateModalCallback) {
                                 $scope.BankAccountCreateModalCallback($scope);
                             }

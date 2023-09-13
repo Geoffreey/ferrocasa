@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -17,7 +17,7 @@ $user_id = user_id();
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -30,12 +30,12 @@ $to = to();
 // If ($from) {
 //   $where_query .= date_range_expense_filter($from, $to);
 // }
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT * FROM expenses 
   WHERE $where_query GROUP by category_id
   ) as expenses";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -103,6 +103,6 @@ $Hooks->do_action('After_Showing_Loss_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

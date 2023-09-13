@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -39,12 +39,12 @@ function validate_request_data($request)
     throw new Exception(trans('error_reference_no'));
   }
 
-  // Validate customer id
+  // Validar identificación del cliente
   if (!validateInteger($request->post['customer_id'])) {
     throw new Exception(trans('error_customer'));
   }
 
-  // Validate status
+  // Validar estado
   if (!validateString($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
@@ -100,7 +100,7 @@ function validate_quotation_items($items)
 {
   foreach ($items as $product) 
   {
-    // Validate product id
+    // Validar identificación del producto
     if (!validateInteger($product['item_id'])) {
       throw new Exception(trans('error_invalid_item_id'));
     }
@@ -399,7 +399,7 @@ if (isset($request->get['reference_no']) && $request->get['action_type'] == 'DOW
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -428,12 +428,12 @@ if (from()) {
     $where_query .= date_range_filter($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT quotation_info.*, quotation_price.payable_amount FROM `quotation_info` 
   LEFT JOIN `quotation_price` ON (quotation_info.reference_no = quotation_price.reference_no) 
   WHERE $where_query) as quotation_info";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 $columns = array(
@@ -530,6 +530,6 @@ $Hooks->do_action('After_Showing_Quotation_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

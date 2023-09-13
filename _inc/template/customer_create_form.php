@@ -30,6 +30,15 @@
     </div>
 
     <div class="form-group">
+      <label for="customer_nit" class="col-sm-3 control-label">
+        <?php echo sprintf(trans('label_nit'), null); ?>
+      </label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" id="customer_nit" value="<?php echo isset($request->post['customer_nit']) ? $request->post['customer_nit'] : null; ?>" name="customer_nit">
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="dob" class="col-sm-3 control-label">
         <?php echo sprintf(trans('label_date_of_birth'), null); ?>
       </label>

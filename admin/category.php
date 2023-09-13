@@ -42,7 +42,7 @@ include ("left_sidebar.php");
       <li>
         <a href="product.php"><?php echo trans('text_products'); ?></a>  
       </li>
-      <li class="active">
+      <li class="activ">
         <?php echo trans('text_category_title'); ?>
       </li>
     </ol>

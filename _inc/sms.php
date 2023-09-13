@@ -3,8 +3,8 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
-// If user is not logged in then an alert message
+// Comprobar si el usuario inició sesión o no
+// Si el usuario no ha iniciado sesión, aparece un mensaje de alerta
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -13,7 +13,7 @@ if (!is_loggedin()) {
 }
 
 // Comprobar, si el usuario tiene permiso de lectura o no
-// If user have not reading permission an alert message
+// Si el usuario no tiene permiso de lectura, aparece un mensaje de alerta
 if (user_group_id() != 1 && !has_permission('access', 'send_sms')) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -26,7 +26,7 @@ if ($request->server['REQUEST_METHOD'] == 'GET' && isset($request->get['action_t
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'send_sms')) {
       throw new Exception(trans('error_update_permission'));
     }

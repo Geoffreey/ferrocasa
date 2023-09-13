@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -28,7 +28,7 @@ $invoice_model = registry()->get('loader')->model('invoice');
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -38,13 +38,13 @@ $from = from();
 $to = to();
 $where_query .= date_range_item_filter($from, $to);
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT selling_item.id, selling_item.taxrate_id, SUM(selling_item.item_total) as subtotal, SUM(selling_item.item_tax) as tax_amount, selling_item.created_at, tr.taxrate_name, tr.code_name, tr.taxrate, COUNT(*) as count FROM selling_item
   LEFT JOIN taxrates tr ON (selling_item.taxrate_id = tr.taxrate_id) 
   WHERE $where_query GROUP by selling_item.taxrate_id
   ) as selling_item";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -99,6 +99,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

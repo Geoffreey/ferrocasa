@@ -53,7 +53,7 @@ function (
         $("#user_id").val(window.getParameterByName('id')).trigger("change");
     }
 
-    // Payment From
+    // Pago de
     $(document).delegate("#pay_now", "click", function(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -79,7 +79,7 @@ function (
         });
     });
 
-    // populate custoemr due paid form by query string
+    // completa el pago adeudado por el cliente mediante cadena de consulta
     if (window.getParameterByName("user_id") && window.getParameterByName("paid_form")) {
         user_id = window.getParameterByName("user_id");
         UserDuePaidModal({userId: user_id, dueAmount: 0});

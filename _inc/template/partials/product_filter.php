@@ -5,7 +5,7 @@
       <?php if (isset($request->get['sup_id'])) : ?>
         <?php echo get_the_supplier($request->get['sup_id'], 'sup_name'); ?> (<?php echo total_product_of_supplier($request->get['sup_id']); ?>)
       <?php else: ?>
-        <?php echo trans('label_all_product'); ?>
+        <?php echo trans('label_Proveedores'); ?>
       <?php endif; ?>
       <span class="caret"></span>
   </button>
@@ -37,7 +37,8 @@
   </ul>
 </div>
 
-<!--Fitrado por categoria-->
+
+  <!--Boton filtro por categoria-->
 <div class="btn-group"> 
   <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
       <span class="sr-only">Toggle Dropdown</span>
@@ -45,15 +46,15 @@
       <?php if (isset($request->get['category_id'])) : ?>
         <?php echo get_the_category($request->get['category_id'], 'category_name'); ?> (<?php echo get_total_category_item($request->get['category_id']); ?>)
       <?php else: ?>
-        <?php echo trans('label_all_category'); ?>
+        <?php echo trans('label_category'); ?>
       <?php endif; ?>
       <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="product.php">
-        <span>
-          <?php echo trans('label_all_category'); ?>
+      <span>
+          <?php echo trans('label_all_product'); ?>
         </span>
       </a>
     </li>
@@ -67,7 +68,7 @@
       $statement1->execute(array($category_id));
       $category = $statement1->fetch(PDO::FETCH_ASSOC);
       if ($category) : ?>
-        <li class="category-name<?php echo isset($request->get['category_id']) && $request->get['category_id'] == $category_id ? ' active' : null; ?>">
+        <li class="category_name<?php echo isset($request->get['category_id']) && $request->get['category_id'] == $category_id ? ' active' : null; ?>">
             <a href="product.php?category_id=<?php echo $category_id; ?>">
               <span><?php echo $category['category_name']; ?> (<?php echo get_total_category_item($category_id); ?>)</span>
             </a>

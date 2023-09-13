@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -13,7 +13,7 @@ if (!is_loggedin()) {
 }
 
 // Comprobar, si el usuario tiene permiso de lectura o no
-// If user have not reading permission an alert message
+// Si el usuario no tiene permiso de lectura, aparece un mensaje de alerta
 if (user_group_id() != 1 && !has_permission('access', 'read_currency')) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_currency')) {
 // LOAD CURRENCY MODEL
 $currency_model = registry()->get('loader')->model('currency');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate title
@@ -52,7 +52,7 @@ function validate_request_data($request)
     throw new Exception(trans('error_store'));
   }
 
-  // Validate status
+  // Validar estado
   if (!is_numeric($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
@@ -81,12 +81,12 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Create permission check
+    // Crear verificación de permisos
     if (user_group_id() != 1 && !has_permission('access', 'create_currency')) {
       throw new Exception(trans('error_read_permission'));
     }
     
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -120,7 +120,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_currency')) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -136,7 +136,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -167,7 +167,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_currency')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -221,7 +221,7 @@ if (isset($request->get['currency_id']) && isset($request->get['action_type']) &
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -229,13 +229,13 @@ $Hooks->do_action('Before_Showing_Currency_List');
  
 $where_query = 'c2s.store_id = '.store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT currency.*, c2s.status, c2s.sort_order FROM currency 
   LEFT JOIN currency_to_store c2s ON (currency.currency_id = c2s.currency_id) 
   WHERE $where_query GROUP by currency.currency_id
   ) as currency";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'currency_id';
 
 $columns = array(
@@ -314,6 +314,6 @@ $Hooks->do_action('After_Showing_Currency_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

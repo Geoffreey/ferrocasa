@@ -17,6 +17,9 @@ class User
 	private $id;
 	private $group_id;
 	private $username;
+	private $request;
+	private $db;
+	private $session;
 	private $permission = array();
 	private $preference = array();
 
@@ -26,19 +29,19 @@ class User
 		$this->request = registry()->get('request');
 		$this->session = registry()->get('session');
 
-		// if (isset($this->session->data['id'])) {
+		 if (isset($this->session->data['id'])) {
 			$user = '';
 			if (isset($this->request->get['api_key'])) {
-				// $api_key = addslashes(trim(urldecode($this->request->get['api_key'])));
-				// $statement = $this->db->prepare("SELECT `user_id` FROM `api` WHERE `api_key` = ? AND `status` = ?");
-				// $statement->execute(array($api_key, 1));
-				// $row = $statement->fetch(PDO::FETCH_ASSOC);
-				// if ($row) {
+				 $api_key = addslashes(trim(urldecode($this->request->get['api_key'])));
+				 $statement = $this->db->prepare("SELECT `user_id` FROM `api` WHERE `api_key` = ? AND `status` = ?");
+				 $statement->execute(array($api_key, 1));
+				 $row = $statement->fetch(PDO::FETCH_ASSOC);
+				 if ($row) {
 					$statement = $this->db->prepare("SELECT * FROM `users` LEFT JOIN `user_to_store` as `u2s` ON (`users`.`id` = `u2s`.`user_id`) WHERE `id` = ? AND `u2s`.`status` = ?");
-					// $statement->execute(array($row['user_id'], 1));
+					$statement->execute(array($row['user_id'], 1));
 					$statement->execute(array(1, 1));
 					$user = $statement->fetch(PDO::FETCH_ASSOC);
-				// }
+				 }
 			}
 			if (isset($this->session->data['id'])) {
 				$statement = $this->db->prepare("SELECT * FROM `users` LEFT JOIN `user_to_store` as `u2s` ON (`users`.`id` = `u2s`.`user_id`) WHERE `id` = ? AND `u2s`.`status` = ?");
@@ -70,7 +73,7 @@ class User
 			} else {
 				$this->logout();
 			}
-		// }			
+		 }			
 	}
 
 	public function login($username, $password) 

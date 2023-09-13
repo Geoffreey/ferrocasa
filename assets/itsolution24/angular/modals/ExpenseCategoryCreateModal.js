@@ -60,7 +60,7 @@ window.angularApp.factory("ExpenseCategoryCreateModal", ["API_URL", "window", "j
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeExpenseCategoryCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -81,7 +81,7 @@ window.angularApp.factory("ExpenseCategoryCreateModal", ["API_URL", "window", "j
                                 expense_categoryCount.text(parseInt(expense_categoryCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.ExpenseCategoryCreateModalCallback) {
                                 $scope.ExpenseCategoryCreateModalCallback($scope);
                             }

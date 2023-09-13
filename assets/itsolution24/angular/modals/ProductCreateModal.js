@@ -88,7 +88,7 @@ window.angularApp.factory("ProductCreateModal", ["API_URL", "window", "jQuery", 
                                 productCount.text(parseInt(productCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.ProductCreateModalCallback) {
                                 $scope.ProductCreateModalCallback($scope);
                             }

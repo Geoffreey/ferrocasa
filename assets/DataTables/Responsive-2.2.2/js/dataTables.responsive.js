@@ -851,7 +851,7 @@ $.extend( Responsive.prototype, {
 		var clonedHeader = $( dt.table().header().cloneNode( false ) ).appendTo( clonedTable );
 		var clonedBody   = $( dt.table().body() ).clone( false, false ).empty().appendTo( clonedTable ); // use jQuery because of IE8
 
-		// Header
+		// Encabezado
 		var headerCells = dt.columns()
 			.header()
 			.filter( function (idx) {

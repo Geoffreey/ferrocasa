@@ -29,7 +29,32 @@ class ModelIncome extends Model
 			WHERE  {$where_query}");
 		$statement->execute(array());
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
-		$income = isset($row['total']) ? $row['total'] : 0;
+		$income = array('total'=>'','group'=>array());
+		$income['total'] = isset($row['total']) ? $row['total'] : 0;
+		$income['group']=$this->getIncomeGroupType($from, $to, $store_id);
+		return $income;
+	}
+
+	//jalvarez 12-09-2023
+	//se agregan el metodo para obtener los ingresos desglozados por los tipo de pago
+	public function getIncomeGroupType($from, $to, $store_id = null){
+		$store_id = $store_id ? $store_id : store_id();
+
+		// Income
+		$where_query = "sp.invoice_id>0";
+		if ($from) {
+			$from = date('Y-m-d H:i:s', strtotime($from.' '. '00:00:00')); 
+			$to = date('Y-m-d H:i:s', strtotime($to.' '. '23:59:59'));
+			$where_query .= " AND si.created_at >= '{$from}' AND si.created_at <= '{$to}'";
+		}
+		$statement = $this->db->prepare("SELECT (select name from pmethods where pmethod_id=si.pmethod_id) as tipo_pago, 
+			SUM(payable_amount) as monto FROM selling_info as si 
+			RIGHT JOIN selling_price as sp on sp.invoice_id=si.invoice_id 
+			WHERE  {$where_query} 
+			GROUP BY pmethod_id");
+		$statement->execute(array());
+		$row = $statement->fetchAll(PDO::FETCH_ASSOC);
+		$income = count($row)>0 ? $row : array();
 		return $income;
 	}
 
@@ -49,7 +74,7 @@ class ModelIncome extends Model
 		$statement->execute(array());
 		$substract = $statement->fetch(PDO::FETCH_ASSOC);
 		$substract = isset($substract['total']) ? $substract['total'] : 0;
-		return $income - $substract;
+		return $income['total'] - $substract;
 	}
 
 	public function getTotalSourceIncome($source_id, $from, $to, $store_id = null) 

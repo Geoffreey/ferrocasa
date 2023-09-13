@@ -62,7 +62,7 @@ window.angularApp.factory("SMSResendModal", ["API_URL", "window", "jQuery", "$ht
                                     $("#row_"+response.data.id).flash("yellow", 5000);
                                 }
                             }, false);
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeSMSResendModal();
                             $(document).find(".close").trigger("click");
                         });

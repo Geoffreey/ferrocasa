@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -26,7 +26,7 @@ $pmethod_model = registry()->get('loader')->model('pmethod');
 $store_id = store_id();
 $user_id = user_id();
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate name
@@ -49,12 +49,12 @@ function validate_request_data($request)
     throw new Exception(trans('error_store'));
   }
 
-  // Validate status
+  // Validar estado
   if (!is_numeric($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
 
-  // Validate sort order
+  // Validar orden de clasificación
   if (!is_numeric($request->post['sort_order'])) {
     throw new Exception(trans('error_sort_order'));
   }
@@ -78,12 +78,12 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Create permission check
+    // Crear verificación de permisos
     if (user_group_id() != 1 && !has_permission('access', 'create_pmethod')) {
       throw new Exception(trans('error_read_permission'));
     }
     
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -122,7 +122,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (empty($request->post['pmethod_id'])) {
       throw new Exception(trans('error_pmethod_id'));
     }
@@ -133,7 +133,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -165,7 +165,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_pmethod')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -248,7 +248,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'updadte_pmethod_status')) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -258,7 +258,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_id'));
     }
 
-    // Validate status
+    // Validar estado
     if (!validateString($request->post['status'])) {
       throw new Exception(trans('error_status'));
     }
@@ -300,7 +300,7 @@ if (isset($request->get['pmethod_id']) AND isset($request->get['action_type']) &
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -308,13 +308,13 @@ $Hooks->do_action('Before_Showing_PMethod_List');
 
 $where_query = "p2s.store_id = {$store_id}";
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT pmethods.*, p2s.status, p2s.sort_order FROM pmethods 
   LEFT JOIN pmethod_to_store p2s ON (pmethods.pmethod_id = p2s.ppmethod_id) 
   WHERE $where_query
   ) as pmethods";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'pmethod_id';
  
 $columns = array(
@@ -382,6 +382,6 @@ $Hooks->do_action('After_Showing_PMethod_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

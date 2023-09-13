@@ -60,7 +60,7 @@ window.angularApp.factory("IncomeSourceCreateModal", ["API_URL", "window", "jQue
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeIncomeSourceCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -81,7 +81,7 @@ window.angularApp.factory("IncomeSourceCreateModal", ["API_URL", "window", "jQue
                                 income_sourceCount.text(parseInt(income_sourceCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.IncomeSourceCreateModalCallback) {
                                 $scope.IncomeSourceCreateModalCallback($scope);
                             }

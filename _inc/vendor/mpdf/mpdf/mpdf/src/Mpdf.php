@@ -11673,7 +11673,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 		$this->y = $this->tMargin;
 		$this->FontFamily = '';
 
-		// HEADERS AND FOOTERS	// mPDF 6
+		// EncabezadoS AND FOOTERS	// mPDF 6
 		if ($ohvalue < 0 || strtoupper($ohvalue) == 'OFF') {
 			$this->HTMLHeader = '';
 			$resetHTMLHeadersrequired = true;
@@ -26694,7 +26694,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 						$block_bottom = 0;
 					}
 					$yadj = ($s['rel_y'] - $s['y']) - ($last_col_bottom) + $this->y0;
-					// callback function
+					// Devolver la llamada function
 					$t = $s['s'];
 
 					// mPDF 5.7+
@@ -28859,7 +28859,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 
 	/* -- COLUMNS -- */
 
-	// Callback function from function printcolumnbuffer in mpdf
+	// Devolver la llamada function from function printcolumnbuffer in mpdf
 	function columnAdjustAdd($type, $k, $xadj, $yadj, $a, $b, $c = 0, $d = 0, $e = 0, $f = 0)
 	{
 		if ($type == 'Td') {  // xpos,ypos

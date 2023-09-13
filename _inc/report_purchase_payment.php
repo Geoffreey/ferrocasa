@@ -25,7 +25,7 @@ $store_id = store_id();
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -34,11 +34,11 @@ $from = from();
 $to = to();
 $where_query .= date_range_purchase_payments_filter($from, $to);
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT purchase_payments.*, SUM(amount) as totalAmount FROM purchase_payments 
         WHERE $where_query GROUP BY `invoice_id`) as purchase_payments";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 $columns = array(
   array( 'db' => 'id', 'dt' => 'id' ),
@@ -90,6 +90,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

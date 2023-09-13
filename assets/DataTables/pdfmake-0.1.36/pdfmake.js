@@ -17767,7 +17767,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     var registerImmediate;
 
     function setImmediate(callback) {
-      // Callback can either be a function or a string
+      // Devolver la llamada can either be a function or a string
       if (typeof callback !== "function") {
         callback = new Function("" + callback);
       }

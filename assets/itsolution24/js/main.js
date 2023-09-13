@@ -402,7 +402,7 @@ function toggleFullScreenMode () {
     }
 }
 
-// Callback functions
+// Devolver la llamada functions
 function save_template_content_data(id, content) 
 {
 	var template_id = $("#"+id).data("id");
@@ -432,7 +432,7 @@ function save_template_content_data(id, content)
 	return true;
 }
 
-// Callback functions
+// Devolver la llamada functions
 function save_template_css_data(id, content) 
 {
 	var template_id = $("#"+id).data("id");

@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -27,13 +27,13 @@ $sms_model = registry()->get('loader')->model('sms');
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
 $Hooks->do_action('Before_Showinig_SMS_Report');
  
-// DB table to use
+// tabla de base de datos a utilizar
 $where_query = 'store_id = ' . store_id();
 
 if (isset($request->get['type'])) {
@@ -72,7 +72,7 @@ if (($from && ($to == false)) || ($from == $to)) {
 
 $table = "(SELECT * FROM sms_schedule WHERE $where_query) as sms_schedule";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 $columns = array(
   array(
@@ -152,6 +152,6 @@ $Hooks->do_action('After_Showinig_SMS_Report');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

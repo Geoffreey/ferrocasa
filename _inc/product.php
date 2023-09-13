@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_product')) {
 // LOAD PRODUCT MODEL
 $product_model = registry()->get('loader')->model('product');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate product type
@@ -101,12 +101,12 @@ function validate_request_data($request)
     throw new Exception(trans('error_store'));
   }
 
-  // Validate status
+  // Validar estado
   if (!is_numeric($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
 
-  // Validate sort order
+  // Validar orden de clasificación
   if (!is_numeric($request->post['sort_order'])) {
     throw new Exception(trans('error_sort_order'));
   }
@@ -151,7 +151,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate product code
@@ -188,12 +188,12 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_product')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (!validateInteger($request->post['p_id'])) {
       throw new Exception(trans('error_product_id'));
     }
@@ -205,7 +205,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 
     $p_id = $request->post['p_id'];
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate product code
@@ -244,14 +244,14 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_delete_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (!validateInteger($request->post['p_id'])) {
       throw new Exception(trans('error_product_id'));
     }
 
     $p_id = $request->post['p_id'];
 
-    // validte delete action
+    // validar la acción de eliminación
     if (empty($request->post['delete_action'])) {
       throw new Exception(trans('error_delete_action'));
     }
@@ -346,7 +346,7 @@ if (isset($request->get['p_id']) AND isset($request->get['action_type']) && $req
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -354,16 +354,17 @@ $Hooks->do_action('Before_Showing_Product_List');
 
 $where_query = 'p2s.store_id = ' . store_id();
  
-// DB table to use
-$table = "(SELECT products.*, p2s.*, suppliers.sup_mobile, suppliers.sup_name as supplier, boxes.box_name FROM products 
+// tabla de base de datos a utilizar
+$table = "(SELECT products.*, p2s.*, suppliers.sup_mobile, suppliers.sup_name as supplier, categorys.category_name as category, boxes.box_name FROM products 
   LEFT JOIN product_to_store p2s ON (products.p_id = p2s.product_id) 
-  LEFT JOIN suppliers ON (p2s.sup_id = suppliers.sup_id) 
+  LEFT JOIN suppliers ON (p2s.sup_id = suppliers.sup_id)
+  LEFT JOIN categorys ON (products.category_id = categorys.category_id) 
   LEFT JOIN boxes ON (p2s.box_id = boxes.box_id) 
   WHERE $where_query GROUP by products.p_id
   ORDER BY p2s.p_date DESC
   ) as products";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'p_id';
 $columns = array(
   array(
@@ -413,6 +414,7 @@ $columns = array(
     'dt' => 'supplier' ,
     'formatter' => function($d, $row) {
         return "<a href=\"supplier_profile.php?sup_id=" . $row['sup_id'] . "\">" . $row['supplier'] . "</a>";
+        return "<a href=\"category.php?category_id=" . $row['category_id'] . "\">" . $row['category'] . "</a>";
     }
   ),
   array( 'db' => 'sup_mobile',  'dt' => 'supplier_mobile' ),
@@ -429,6 +431,7 @@ $columns = array(
     'dt' => 'category_name' ,
     'formatter' => function($d, $row) {
         return get_the_category($row['category_id'], 'category_name');
+        
     }
   ),
   array( 
@@ -581,6 +584,10 @@ if (isset($request->get['sup_id']) && $request->get['sup_id'] != 'null') {
   $sup_id = (int)$request->get['sup_id'];
   $where_query .= ' AND sup_id = ' . $sup_id;
 }
+if (isset($request->get['category_id']) && $request->get['category_id'] != 'null') {
+  $category_id = (int)$request->get['category_id'];
+  $where_query .= ' AND category_id = ' . $category_id;
+}
 if (isset($request->get['stock_query']) && $request->get['stock_query']) {
   $where_query .= " AND (quantity_in_stock <= alert_quantity)";
 }
@@ -602,6 +609,6 @@ $Hooks->do_action('After_Showing_Product_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

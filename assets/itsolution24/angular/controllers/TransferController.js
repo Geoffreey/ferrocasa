@@ -125,7 +125,7 @@ function (
             var total;
             var pageTotal;
             var api = this.api();
-            // Remove the formatting to get integer data for summation
+            // Elimine el formato para obtener datos enteros para la suma
             var intVal = function ( i ) {
                 return typeof i === "string" ?
                     i.replace(/[\$,]/g, "")*1 :
@@ -133,26 +133,26 @@ function (
                         i : 0;
             };
 
-            // Total over this page
+            // Total en esta página
             pageTotal = api
                 .column( 4, { page: "current"} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 4 ).footer() ).html(
                 formatDecimal(pageTotal, 2)
             );
 
-            // Total over this page
+            // Total en esta página
             pageTotal = api
                 .column( 5, { page: "current"} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 5 ).footer() ).html(
                 formatDecimal(pageTotal, 2)
             );
@@ -473,7 +473,7 @@ function (
         }, 300);
     });
 
-    // Reset form
+    // Restablecer formulario
     $(document).delegate("#reset", "click", function (e) {
         e.preventDefault();
         e.stopPropagation();

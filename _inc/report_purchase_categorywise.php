@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -23,7 +23,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_purchase_report')) {
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -32,7 +32,7 @@ $from = from();
 $to = to();
 $where_query .= date_range_filter2($from, $to);
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT purchase_info.*, categorys.category_name, purchase_item.id, purchase_item.category_id, purchase_item.item_quantity, SUM(purchase_item.item_total) as purchase_price, SUM(purchase_item.item_quantity) as total_stock, SUM(purchase_price.paid_amount) as paid_amount FROM purchase_item 
       LEFT JOIN categorys ON (purchase_item.category_id = categorys.category_id)
       LEFT JOIN purchase_info ON (purchase_item.invoice_id = purchase_info.invoice_id)
@@ -41,7 +41,7 @@ $table = "(SELECT purchase_info.*, categorys.category_name, purchase_item.id, pu
       GROUP BY purchase_item.category_id
       ORDER BY total_stock DESC) as purchase_item";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 $columns = array(
     array( 'db' => 'category_id', 'dt' => 'category_id' ),
@@ -90,6 +90,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

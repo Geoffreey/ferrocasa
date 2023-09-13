@@ -18,8 +18,8 @@ class ModelCustomer extends Model
 	{
 		$gtin = isset($data['gtin']) ? $data['gtin'] : '';
 		$customer_state = isset($data['customer_state']) ? $data['customer_state'] : '';
-    	$statement = $this->db->prepare("INSERT INTO `customers` (customer_name, dob, customer_email, customer_mobile, customer_sex, customer_age, gtin, customer_address, customer_city, customer_state, customer_country, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    	$statement->execute(array($data['customer_name'], date('Y-m-d',strtotime($data['dob'])), $data['customer_email'], $data['customer_mobile'], $data['customer_sex'], $data['customer_age'], $gtin, $data['customer_address'], $data['customer_city'], $customer_state, $data['customer_country'], date_time()));
+    	$statement = $this->db->prepare("INSERT INTO `customers` (customer_name, dob, customer_email, customer_mobile, customer_nit, customer_sex, customer_age, gtin, customer_address, customer_city, customer_state, customer_country, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    	$statement->execute(array($data['customer_name'], date('Y-m-d',strtotime($data['dob'])), $data['customer_email'], $data['customer_mobile'], $data['customer_nit'], $data['customer_sex'], $data['customer_age'], $gtin, $data['customer_address'], $data['customer_city'], $customer_state, $data['customer_country'], date_time()));
     	$customer_id = $this->db->lastInsertId();
 		if (isset($data['customer_store'])) {
 			foreach ($data['customer_store'] as $store_id) {
@@ -53,8 +53,8 @@ class ModelCustomer extends Model
 	{
 		$gtin = isset($data['gtin']) ? $data['gtin'] : '';
 		$customer_state = isset($data['customer_state']) ? $data['customer_state'] : '';
-    	$statement = $this->db->prepare("UPDATE `customers` SET `customer_name` = ?, `dob` = ?, `customer_email` = ?, `customer_mobile` = ?, `customer_sex` = ?, `customer_age` = ?, `gtin` = ?, `customer_address` = ?, `customer_city` = ?, `customer_state` = ?, `customer_country` = ? WHERE `customer_id` = ? ");
-    	$statement->execute(array($data['customer_name'], date('Y-m-d',strtotime($data['dob'])), $data['customer_email'], $data['customer_mobile'], $data['customer_sex'], $data['customer_age'], $gtin, $data['customer_address'], $data['customer_city'], $customer_state, $data['customer_country'], $customer_id));
+    	$statement = $this->db->prepare("UPDATE `customers` SET `customer_name` = ?, `dob` = ?, `customer_email` = ?, `customer_mobile` = ?, `customer_nit` = ?, `customer_sex` = ?, `customer_age` = ?, `gtin` = ?, `customer_address` = ?, `customer_city` = ?, `customer_state` = ?, `customer_country` = ? WHERE `customer_id` = ? ");
+    	$statement->execute(array($data['customer_name'], date('Y-m-d',strtotime($data['dob'])), $data['customer_email'], $data['customer_mobile'], $data['customer_nit'], $data['customer_sex'], $data['customer_age'], $gtin, $data['customer_address'], $data['customer_city'], $customer_state, $data['customer_country'], $customer_id));
 
     	// Insert customer into store
     	if (isset($data['customer_store'])) {
@@ -187,6 +187,9 @@ class ModelCustomer extends Model
 		if (isset($data['filter_mobile'])) {
 			$sql .= " AND `c`.`customer_mobile` LIKE '" . $data['filter_mobile'] . "%'";
 		}
+		if (isset($data['filter_nit'])) {
+			$sql .= " AND `c`.`customer_nit` LIKE '" . $data['filter_nit'] . "%'";
+		}
 
 		if (isset($data['filter_has_giftcard'])) {
 			$sql .= " AND `c`.`is_giftcard` = " . $data['filter_has_giftcard'];
@@ -205,7 +208,8 @@ class ModelCustomer extends Model
 		$sort_data = array(
 			'customer_name',
 			'customer_email',
-			'customer_mobile'
+			'customer_mobile',
+			'customer_nit'
 		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
@@ -396,7 +400,7 @@ class ModelCustomer extends Model
 	public function getTodayBirthDayCustomers($store_id = null)
 	{
 		$store_id = $store_id ? $store_id : store_id();
-		$statement = $this->db->prepare("SELECT `customers`.`customer_id`, `customer_name`, `customer_mobile`, `customer_email`, `created_at` FROM `customers` 
+		$statement = $this->db->prepare("SELECT `customers`.`customer_id`, `customer_name`, `customer_mobile`, `customer_nit`, `customer_email`, `created_at` FROM `customers` 
         LEFT JOIN `customer_to_store` c2s ON (`customers`.`customer_id` = `c2s`.`customer_id`)
         WHERE DAY(`customers`.`dob`) = ? AND MONTH(`customers`.`dob`) = ? AND `store_id` = ? GROUP BY `customers`.`customer_id`");
 	    $statement->execute(array(date('d'), date('m'), $store_id));

@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'installment_payment')) {
 $store_id = store_id();
 $user_id = user_id();
 
-// Validate POST Data
+// Validar datos de publicación
 function validate_request_data($request) {
 
   // ID validation
@@ -43,7 +43,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'installment_payment')) {
       throw new Exception(trans('error_installment_payment'));
     }
@@ -83,7 +83,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
         $the_payment_status = 'paid';
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     $Hooks->do_action('Before_Installment_payment', $request);
@@ -186,7 +186,7 @@ if (isset($request->get['invoice_id']) && isset($request->get['action_type']) &&
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -223,11 +223,11 @@ if (from()) {
     $where_query .= date_range_installment_payment_filter($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT installment_payments.* FROM installment_payments
   WHERE {$where_query}) as installment_payments";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -315,6 +315,6 @@ $Hooks->do_action('After_Showing_Installment_PaymentList');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

@@ -55,8 +55,8 @@ function (
         "columnDefs": [
             {"targets": [5, 6, 7, 8], "orderable": false},
             {"visible": false,  "targets": hideColumsArray},
-            {"className": "text-right", "targets": [4]},
-            {"className": "text-center", "targets": [0, 4, 5, 6, 7, 8]},
+            {"className": "text-right", "targets": [5]},
+            {"className": "text-center", "targets": [0, 5, 6, 7, 8, 9]},
             { 
                 "targets": [0],
                 'createdCell':  function (td, cellData, rowData, row, col) {
@@ -111,11 +111,18 @@ function (
                    $(td).attr('data-title', $("#customer-customer-list thead tr th:eq(8)").html());
                 }
             },
+            { 
+                "targets": [9],
+                'createdCell':  function (td, cellData, rowData, row, col) {
+                   $(td).attr('data-title', $("#customer-customer-list thead tr th:eq(9)").html());
+                }
+            },
         ],
         "aoColumns": [
             {data : "customer_id"},
             {data : "customer_name"},
             {data : "customer_mobile"},
+            {data : "customer_nit"},
             {data : "customer_sex"},
             {data : "balance"},
             {data : "btn_pos"},
@@ -126,22 +133,22 @@ function (
         "footerCallback": function ( row, data, start, end, display ) {
             var pageTotal;
             var api = this.api();
-            // Remove the formatting to get integer data for summation
+            // Elimine el formato para obtener datos enteros para la suma
             var intVal = function ( i ) {
                 return typeof i === "string" ?
                     i.replace(/[\$,]/g, "")*1 :
                     typeof i === "number" ?
                         i : 0;
             };
-            // Total over all pages at column 4
+            // Total over all pages at column 5
             pageTotal = api
-                .column( 4, { page: "current"} )
+                .column( 5, { page: "current"} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
             // Update footer
-            $( api.column( 4 ).footer() ).html(
+            $( api.column( 5 ).footer() ).html(
                 window.formatDecimal(pageTotal, 2)
             );
         },
@@ -167,7 +174,7 @@ function (
                         .css( 'font-size', 'inherit' );
                 },
                 exportOptions: {
-                    columns: [ 0, 2, 3, 4]
+                    columns: [ 0, 2, 3, 4, 5]
                 }
             },
             {
@@ -190,7 +197,7 @@ function (
                         .css( 'font-size', 'inherit' );
                 },
                 exportOptions: {
-                    columns: [ 0, 2, 3, 4]
+                    columns: [ 0, 2, 3, 4, 5]
                 }
             },
             {
@@ -199,7 +206,7 @@ function (
                 titleAttr: "Excel",
                 title: window.store.name + " > Customer List",
                 exportOptions: {
-                    columns: [ 0, 2, 3, 4]
+                    columns: [ 0, 2, 3, 4, 5]
                 }
             },
             {
@@ -208,7 +215,7 @@ function (
                 titleAttr: "CSV",
                 title: window.store.name + " > Customer List",
                 exportOptions: {
-                    columns: [ 0, 2, 3, 4]
+                    columns: [ 0, 2, 3, 4, 5]
                 }
             },
             {
@@ -218,7 +225,7 @@ function (
                 download: "open",
                 title: window.store.name + " > Customer List",
                 exportOptions: {
-                    columns: [ 0, 2, 3, 4]
+                    columns: [ 0, 2, 3, 4, 5]
                 },
                 customize: function (doc) {
                     doc.content[1].table.widths =  Array(doc.content[1].table.body[0].length + 1).join('*').split('');
@@ -278,7 +285,7 @@ function (
     // End datatable
     //================
 
-    // Create customer
+    // crear cliente
     $(document).delegate("#create-customer-submit", "click", function(e) {
         e.preventDefault();
 
@@ -329,7 +336,7 @@ function (
         });
     });
 
-    // Edit customer
+    // Editar cliente
     $(document).delegate("#edit-customer", "click", function(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -337,7 +344,7 @@ function (
         CustomerEditModal(d);
     });
 
-    // Delete customer
+    // eliminar cliente
     $(document).delegate("#delete-customer", "click", function(e) {
         e.stopPropagation();
         e.preventDefault();

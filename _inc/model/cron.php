@@ -9,7 +9,7 @@
 | -----------------------------------------------------
 | DERECHOS RESERVADOS POR geoffdeep.pw
 | -----------------------------------------------------
-| WEBSITE:      http://geoffdeep.pw
+| WEBSITE:      http://web.geoffdeep.pw
 | -----------------------------------------------------
 */
 class ModelCron extends Model

@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -26,7 +26,7 @@ $bank_account_model = registry()->get('loader')->model('bankaccount');
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -34,13 +34,13 @@ $Hooks->do_action('Before_Showing_BankAccountSheet');
 
 $where_query = 'ba2s.store_id = ' . store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT bank_accounts.*, ba2s.deposit, ba2s.withdraw, ba2s.transfer_from_other, ba2s.transfer_to_other, ba2s.status, ba2s.sort_order FROM bank_accounts 
   LEFT JOIN bank_account_to_store ba2s ON (bank_accounts.id = ba2s.account_id) 
   WHERE $where_query GROUP by bank_accounts.id
   ) as bank_accounts";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -104,6 +104,6 @@ $Hooks->do_action('After_Showing_BankAccountSheet');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

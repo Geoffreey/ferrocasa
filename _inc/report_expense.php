@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -17,7 +17,7 @@ $user_id = user_id();
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -29,14 +29,14 @@ if (isset($request->get['account_id']) && $request->get['account_id'] != 'null')
 }
 $from = from();
 $to = to();
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT bank_transaction_info.*, expense_categorys.category_slug, bank_transaction_price.price_id, SUM(bank_transaction_price.amount) amount 
   FROM bank_transaction_info 
   JOIN expense_categorys ON bank_transaction_info.exp_category_id = expense_categorys.category_id
   JOIN bank_transaction_price ON bank_transaction_info.info_id = bank_transaction_price.info_id
   WHERE $where_query GROUP BY bank_transaction_info.exp_category_id) as bank_transaction_info";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 // indexes
@@ -108,6 +108,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

@@ -493,7 +493,7 @@ class ModelInvoice extends Model
           $statement->execute(array('paid', $invoice_id, $store_id));
         }
 
-        // Update customer due
+        // Actualizar cliente due
         $statement = db()->prepare("UPDATE `customer_to_store` SET `due` = `due` - {$paid_amount}  WHERE `store_id` = ? AND `customer_id` = ?");
         $statement->execute(array($store_id, $customer_id));
 

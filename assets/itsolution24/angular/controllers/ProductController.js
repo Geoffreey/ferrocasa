@@ -39,6 +39,7 @@ function (
 
     var dt = $("#product-product-list");
     var supplierId;
+    var categoryId
     var productId;
     var productLocation;
 
@@ -53,6 +54,7 @@ function (
     }
 
     supplierId = window.getParameterByName("sup_id");
+    categoryId = window.getParameterByName("category_id");
     productLocation = window.getParameterByName("location");
 
     //================
@@ -64,15 +66,15 @@ function (
         "processing": true,
         "dom": "lfBrtip",
         "serverSide": true,
-        "ajax": API_URL + "/_inc/product.php?sup_id=" + supplierId + "&location=" + productLocation,
+        "ajax": API_URL + "/_inc/product.php?sup_id=" + supplierId + "&location=" + productLocation + "&category_id=" + categoryId,
         "order": [[ 2, "desc"]],
         "aLengthMenu": [
             [10, 25, 50, 100, 200, -1],
             [10, 25, 50, 100, 200, "All"]
         ],
         "columnDefs": [
-            {"targets": [0, 1, 3, 4, 8, 9, 10, 11, 12], "orderable": false},
-            {"className": "text-center", "targets": [0, 1, 5, 8, 9, 10, 11, 12]},
+            {"targets": [0, 1, 3, 4, 8, 9, 10, 11, 12,13], "orderable": false},
+            {"className": "text-center", "targets": [0, 1, 5, 8, 9, 10, 11, 12,13]},
             {"className": "text-right", "targets": [6, 7]},
             {"visible": false, "targets": hideColumsArray},
             { 
@@ -147,6 +149,12 @@ function (
                    $(td).attr('data-title', $("#product-product-list thead tr th:eq(12)").html());
                 }
             },
+            { 
+                "targets": [13],
+                'createdCell':  function (td, cellData, rowData, row, col) {
+                   $(td).attr('data-title', $("#product-product-list thead tr th:eq(13)").html());
+                }
+            },
         ],
         "aoColumns": [
             {data: "select"},
@@ -157,6 +165,7 @@ function (
             {data: "quantity_in_stock"},
             {data: "purchase_price"},
             {data: "sell_price"},
+            {data: "category_name"},
             {data: "view_btn"},
             {data: "edit_btn"},
             {data: "purchase_btn"},
@@ -166,7 +175,7 @@ function (
         "footerCallback": function ( row, data, start, end, display ) {
             var pageTotal;
             var api = this.api();
-            // Remove the formatting to get integer data for summation
+            // Elimine el formato para obtener datos enteros para la suma
             var intVal = function ( i ) {
                 return typeof i === "string" ?
                     i.replace(/[\$,]/g, "")*1 :
@@ -180,7 +189,7 @@ function (
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 6 ).footer() ).html(
                 window.formatDecimal(pageTotal, 2)
             );
@@ -191,7 +200,7 @@ function (
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            // Update footer
+            // Actualizar pie de página
             $( api.column( 7 ).footer() ).html(
                 window.formatDecimal(pageTotal, 2)
             );
@@ -259,26 +268,26 @@ function (
                 },
                 customize: function (doc) {
                     doc.content[1].table.widths =  Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                    doc.pageMargins = [10,10,10,10];
+                    doc.pageMargins = [11,11,11,11];
                     doc.defaultStyle.fontSize = 7;
                     doc.styles.tableHeader.fontSize = 7;
-                    doc.styles.title.fontSize = 9;
-                    // Remove spaces around page title
+                    doc.styles.title.fontSize = 10;
+                    // Eliminar espacios alrededor del título de la página
                     doc.content[0].text = doc.content[0].text.trim();
-                    // Header
+                    // Encabezado
                     doc.content.splice( 1, 0, {
-                        margin: [ 0, 0, 0, 12 ],
+                        margin: [ 0, 0, 0, 13 ],
                         alignment: 'center',
-                        fontSize: 8,
+                        fontSize: 9,
                         text: 'Printed on: '+window.formatDate(new Date()),
                     });
-                    // Create a footer
+                    // Crear un pie de página
                     doc['footer']=(function(page, pages) {
                         return {
                             columns: [
                                 'Powered by web.ferrocasa.pw',
                                 {
-                                    // This is the right column
+                                    // Esta es la columna de la derecha
                                     alignment: 'right',
                                     text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }]
                                 }
@@ -286,21 +295,21 @@ function (
                             margin: [10, 0]
                         };
                     });
-                    // Styling the table: create style object
+                    // Esta es la columna de la derecha
                     var objLayout = {};
-                    // Horizontal line thickness
+                    // Grosor de la línea horizontal
                     objLayout['hLineWidth'] = function(i) { return 0.5; };
-                    // Vertikal line thickness
+                    // Grosor de la línea vertical
                     objLayout['vLineWidth'] = function(i) { return 0.5; };
-                    // Horizontal line color
+                    // Color de línea horizontal
                     objLayout['hLineColor'] = function(i) { return '#aaa'; };
-                    // Vertical line color
+                    // Color de línea vertical
                     objLayout['vLineColor'] = function(i) { return '#aaa'; };
-                    // Left padding of the cell
-                    objLayout['paddingLeft'] = function(i) { return 4; };
-                    // Right padding of the cell
+                    // Relleno izquierdo de la celda.
+                    objLayout['paddingLeft'] = function(i) { return ; };
+                    // Relleno derecho de la celda.
                     objLayout['paddingRight'] = function(i) { return 4; };
-                    // Inject the object in the document
+                    // Inyectar el objeto en el documento.
                     doc.content[1].layout = objLayout;
                 }
             }
@@ -308,7 +317,7 @@ function (
     });
 
     //================
-    // End datatable
+    // Finalizar tabla de datos
     //================
 
     // Oopen edit modal dialog box by query string
@@ -339,6 +348,7 @@ function (
         if (type == 'service') {
             $scope.$apply(function() {
                 $scope.hideSupplier = 1;
+                $scope.hideCategory = 1;
                 $scope.hideBrand = 1;
                 $scope.hideUnit = 1;
                 $scope.hideBox = 1;
@@ -346,10 +356,12 @@ function (
                 $scope.showSellPrice = 1;
                 $scope.showPurchasePrice = 1;
                 $scope.hideAlertQuantity = 1;
+                
             });
         } else {
             $scope.$applyAsync(function() {
                 $scope.hideSupplier = !1;
+                $scope.hideCategory = 1;
                 $scope.hideBrand = !1;
                 $scope.hideUnit = !1;
                 $scope.hideBox = !1;
@@ -357,6 +369,7 @@ function (
                 $scope.showSellPrice = !1;
                 $scope.showPurchasePrice = !1;
                 $scope.hideAlertQuantity = !1;
+                
             }); 
         }
     }
@@ -402,7 +415,7 @@ function (
             }, false);
 
             setTimeout(function() {
-                // Reset form
+                // Restablecer formulario
                 $("#reset").trigger("click");
                 $("#category_id").val(null).trigger("change");
                 $("#sup_id").val(null).trigger("change");

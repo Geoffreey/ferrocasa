@@ -125,7 +125,7 @@ window.angularApp.factory("ProductEditModal", ["API_URL", "window", "jQuery", "$
                         .then(function (willDelete) {
                             if (willDelete) {
 
-                                // close modalwindow
+                                // Cerrar ventana modal
                                 $scope.closeProductEditModal();
                                 $(document).find(".close").trigger("click");
                                 $("body").removeClass("modal-open");

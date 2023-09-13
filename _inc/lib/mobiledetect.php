@@ -582,7 +582,7 @@ class Mobiledetect
     protected static $uaHttpHeaders = array(
         // The default User-Agent string.
         'HTTP_USER_AGENT',
-        // Header can occur on devices using Opera Mini.
+        // Encabezado can occur on devices using Opera Mini.
         'HTTP_X_OPERAMINI_PHONE_UA',
         // Vodafone specific header: http://www.seoprinciple.com/mobile-web-community-still-angry-at-vodafone/24/
         'HTTP_X_DEVICE_USER_AGENT',

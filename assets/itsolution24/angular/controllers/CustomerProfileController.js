@@ -125,6 +125,12 @@ function (
                    $(td).attr('data-title', $("#invoice-invoice-list thead tr th:eq(9)").html());
                 }
             },
+            { 
+                "targets": [10],
+                'createdCell':  function (td, cellData, rowData, row, col) {
+                   $(td).attr('data-title', $("#invoice-invoice-list thead tr th:eq(10)").html());
+                }
+            },
         ],
         "aoColumns": [
             {data : "created_at"},
@@ -161,7 +167,7 @@ function (
                         .css( 'font-size', 'inherit' );
                 },
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 5, 6, 7, 8 ],
+                    columns: [ 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9],
                     stripHtml: false
                 }
             },
@@ -171,7 +177,7 @@ function (
                 titleAttr: "Copy",
                 title: window.customerName + " - Invoice List-"+from+" to "+to,
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 5, 6, 7, 8 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
                 }
             },
             {
@@ -180,7 +186,7 @@ function (
                 titleAttr: "Excel",
                 title: window.customerName + " - Invoice List-"+from+" to "+to,
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 5, 6, 7, 8 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
                 }
             },
             {
@@ -189,7 +195,7 @@ function (
                 titleAttr: "CSV",
                 title: window.customerName + " - Invoice List-"+from+" to "+to,
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 5, 6, 7, 8 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
                 }
             },
             {
@@ -201,7 +207,7 @@ function (
                 download: "open",
                 title: window.customerName + " - Invoice List-"+from+" to "+to,
                 exportOptions: {
-                    columns: [ 0, 1, 2, 4, 5, 5, 6, 7 ],
+                    columns: [ 0, 1, 2, 4, 5, 5, 6, 7, 8, 9],
                 },
                 customize: function (doc) {
                     doc.content[1].table.widths =  Array(doc.content[1].table.body[0].length + 1).join('*').split('');
@@ -209,9 +215,9 @@ function (
                     doc.defaultStyle.fontSize = 8;
                     doc.styles.tableHeader.fontSize = 8;doc.styles.tableHeader.alignment = "left";
                     doc.styles.title.fontSize = 10;
-                    // Remove spaces around page title
+                    // Eliminar espacios alrededor del título de la página
                     doc.content[0].text = doc.content[0].text.trim();
-                    // Header
+                    // Encabezado
                     doc.content.splice( 1, 0, {
                         margin: [ 0, 0, 0, 12 ],
                         alignment: 'center',
@@ -224,13 +230,13 @@ function (
                         fontSize: 18,
                         text: 'Name: '+window.customerName,
                     });
-                    // Create a footer
+                    // Crear un pie de página
                     doc['footer']=(function(page, pages) {
                         return {
                             columns: [
                                 'Powered by web.ferrocasa.pw',
                                 {
-                                    // This is the right column
+                                    // Esta es la columna de la derecha
                                     alignment: 'right',
                                     text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }]
                                 }
@@ -238,21 +244,21 @@ function (
                             margin: [10, 0]
                         };
                     });
-                    // Styling the table: create style object
+                    // Esta es la columna de la derecha
                     var objLayout = {};
-                    // Horizontal line thickness
+                    // Grosor de la línea horizontal
                     objLayout['hLineWidth'] = function(i) { return 0.5; };
-                    // Vertikal line thickness
+                    // Grosor de la línea vertical
                     objLayout['vLineWidth'] = function(i) { return 0.5; };
-                    // Horizontal line color
+                    // Color de línea horizontal
                     objLayout['hLineColor'] = function(i) { return '#aaa'; };
-                    // Vertical line color
+                    // Color de línea vertical
                     objLayout['vLineColor'] = function(i) { return '#aaa'; };
-                    // Left padding of the cell
+                    // Relleno izquierdo de la celda.
                     objLayout['paddingLeft'] = function(i) { return 4; };
-                    // Right padding of the cell
+                    // Relleno derecho de la celda.
                     objLayout['paddingRight'] = function(i) { return 4; };
-                    // Inject the object in the document
+                    // Inyectar el objeto en el documento.
                     doc.content[1].layout = objLayout;
                 }
             }
@@ -260,15 +266,15 @@ function (
     });
 
     //================
-    // End datatable
+    // Finalizar tabla de datos
     //================
 
-    // Edit customer
+    // Editar cliente
     $scope.customerEdit = function(customer_id, customer_name) {
         CustomerEditModal({customer_id:customer_id, customer_name:customer_name});
     };
 
-    // customer due paid
+    // cliente adeudado
     $(document).delegate("#due-paid", "click", function(e) {
         e.preventDefault();
         var customerId = $(this).data("id");
@@ -291,7 +297,7 @@ function (
         $("#customer_id").val(window.getParameterByName('customer_id')).trigger("change");
     }
 
-    // Payment From
+    // Pago de
     $(document).delegate("#pay_now", "click", function(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -317,23 +323,23 @@ function (
         });
     });
 
-    // populate custoemr due paid form by query string
+    // completa el pago adeudado por el cliente mediante cadena de consulta
     if (window.getParameterByName("customer_id") && window.getParameterByName("paid_form")) {
         customer_id = window.getParameterByName("customer_id");
         CustomerDuePaidModal({customerId: customer_id, dueAmount: 0});
     }
 
-    // Substract customer balance
+    // Restar el saldo del cliente
     $scope.substractCustomerBalance = function(customer) {
         CustomerSubstractBalanceModal(customer);
     };
 
-    // Add customer balance
+    // Agregar saldo del cliente
     $scope.addCustomerBalance = function(customer) {
         CustomerAddBalanceModal(customer);
     };
 
-    // View installment
+    // Ver cuota
     $(document).delegate("#view-installment-btn", "click", function (e) {
         e.stopPropagation();
         e.preventDefault();

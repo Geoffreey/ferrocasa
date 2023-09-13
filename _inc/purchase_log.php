@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -37,7 +37,7 @@ if (isset($request->get['id']) && isset($request->get['action_type']) && $reques
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -54,12 +54,12 @@ $to = to();
 $where_query .= date_range_purchase_log_filter($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT * FROM purchase_logs 
   WHERE $where_query GROUP by id
   ) as expenses";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -137,6 +137,6 @@ $Hooks->do_action('After_Showing_Purchase_Transaction_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

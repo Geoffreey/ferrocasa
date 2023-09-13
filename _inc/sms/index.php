@@ -122,7 +122,7 @@ if ($action_type == 'PROCEEDSCHEDULESMS')
 	exit();
 }
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -140,7 +140,7 @@ if (user_group_id() != 1 && !has_permission('access', 'send_sms')) {
   exit();
 }
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) {
 
 	// People type validation

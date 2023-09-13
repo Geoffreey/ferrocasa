@@ -651,7 +651,7 @@ class FPDI extends FPDF_TPL
                     $page = substr($pagebuff, 0, -$this->footerlen[$this->page]);
                     $footer = substr($pagebuff, -$this->footerlen[$this->page]);
                     $this->setPageBuffer($this->page, $page . $s . $footer);
-                    // Update footer position
+                    // Actualizar pie de página position
                     $this->footerpos[$this->page] += strlen($s);
                 } else {
                     // set page data

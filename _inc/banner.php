@@ -3,8 +3,8 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
-// If user is not logged in then an alert message
+// Comprobar si el usuario inició sesión o no
+// Si el usuario no ha iniciado sesión, aparece un mensaje de alerta
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -13,7 +13,7 @@ if (!is_loggedin()) {
 }
 
 // Comprobar, si el usuario tiene permiso de lectura o no
-// If user have not reading permission an alert message
+// Si el usuario no tiene permiso de lectura, aparece un mensaje de alerta
 if (user_group_id() != 1 && !has_permission('access', 'read_banner')) {
   header('HTTP/1.1 422 Unprocessable Entity');
   header('Content-Type: application/json; charset=UTF-8');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_banner')) {
 // LOAD CATEGORY MODEL
 $banner_model = registry()->get('loader')->model('banner');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate banner name
@@ -75,10 +75,10 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
     
-    // validte existance
+    // validar existencia
     validate_existance($request);
 
     $Hooks->do_action('Before_Create_Banner', $request);
@@ -109,22 +109,22 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_banner')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (empty($request->post['id'])) {
       throw new Exception(trans('error_id'));
     }
 
     $id = $request->post['id'];
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
-    // validte existance
+    // validar existencia
     validate_existance($request, $id);
 
     $Hooks->do_action('Before_Update_Banner', $request);
@@ -152,7 +152,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_banner')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -264,7 +264,7 @@ if (isset($request->get['id']) AND isset($request->get['action_type']) && $reque
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -272,13 +272,13 @@ $Hooks->do_action('Before_Showing_Banner_List');
 
 $where_query = 'b2s.store_id = ' . store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT banners.*, b2s.status, b2s.sort_order FROM banners 
   LEFT JOIN banner_to_store b2s ON (banners.id = b2s.banner_id) 
   WHERE $where_query GROUP by banners.id
   ) as banners";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -345,6 +345,6 @@ $Hooks->do_action('After_Showing_Banner_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

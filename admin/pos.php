@@ -19,13 +19,13 @@ $document->setBodyClass($panel_position.'-panel');
 
 $body_class = $document->getBodyClass();
 
-// FETCH PRINTER
+// BUSCAR IMPRESORA
 $printer_id = store('receipt_printer');
 $statement = $db->prepare("SELECT * FROM `printers` LEFT JOIN `printer_to_store` p2s ON (`printers`.`printer_id`=`p2s`.`pprinter_id`) WHERE `printer_id` = ?");
 $statement->execute(array($printer_id));
 $printer = $statement->fetch(PDO::FETCH_ASSOC);
 
-// FETCH ORDER PRINTERS
+// BUSCAR IMPRESORAS DE PEDIDOS
 $order_printers = array();
 $order_printer_ids = json_decode(store('order_printers'));
 if ($order_printer_ids) {
@@ -125,7 +125,7 @@ if ($order_printer_ids) {
 
 	<?php endif ?>
 
-	<!-- This is Mandatory -->
+	<!-- Esto es obligatorio -->
 	<style type="text/css">
 		body::after { 
 			content: ""; background: url(../assets/itsolution24/img/pos/patterns/<?php echo $user->getPreference('pos_pattern') ? $user->getPreference('pos_pattern') : 'armysuit.jpg'; ?>) repeat repeat;opacity: 0.4;filter: alpha(opacity=40);top: 0;left: 0;bottom: 0;right: 0;position: absolute;z-index: -1;
@@ -156,7 +156,7 @@ if ($order_printer_ids) {
 <body  id="pos-page" class="pos sidebar-mini <?php echo $body_class; ?>" ng-controller="PosController">
 <div class="hidden"><?php include('../assets/itsolution24/img/iconmin/icon.svg');?></div>
 <?php include('../_inc/template/pos_skeleton.php'); ?>
-	<!-- POS Content-Wrapper Start -->
+	<!-- Inicio de POS Content-Wrapper -->
 	<div class="pos-content-wrapper">
 		
 		<div id="vertial-toolbar">
@@ -175,7 +175,7 @@ if ($order_printer_ids) {
 			<div class="row-group">
 				<div class="content-row">
 
-					<!-- All Product List Section Start-->
+					<!-- Inicio de la sección Lista de productos-->
 					<div id="left-panel" class="pos-content" style="<?php echo $user->getPreference('pos_side_panel') == 'left' ? 'float:right' : null; ?>">
 						<div class="contents">
 							<div id="searchbox">
@@ -223,13 +223,13 @@ if ($order_printer_ids) {
 											</span>	
 										</span>
                                          
-										    <dd class="text-center item_price" id="item_price_{{ products.id }}"  value="{{ products.price | formatDecimal:2 }}" data-productId="{{ products.id }}">
+										    <li class="text-center item_price" id="item_price_{{ products.id }}"  value="{{ products.price | formatDecimal:2 }}" data-productId="{{ products.id }}">
 											<strong>Q{{ products.sell_price | formatDecimal:2}}</strong>
-										    </dd>
+										    </li>
 										
-											<dd class="text-center quantity_in_stock" id="quantity_in_stock_{{ products.id }}"  value="{{ products.quantity | formatDecimal:2 }}" data-productId="{{ products.id }}">
+											<li class="text-center quantity_in_stock" id="quantity_in_stock_{{ products.id }}"  value="{{ products.quantity | formatDecimal:2 }}" data-productId="{{ products.id }}">
 												<strong><font color="red"> Stock: {{ products.quantity_in_stock | formatDecimal:0}} </font></strong>
-										    </dd>
+										    </li>
 										
 										<span class="item-mask nowrap" title="{{ products.p_name }}">
 											<svg class="svg-icon"><use href="#icon-add"></svg>
@@ -250,9 +250,8 @@ if ($order_printer_ids) {
 									</span>
 								</div>
 								<div id="salesman">
-									<input type="hidden" name="salesman_id" value="<?php echo user_id();?>">
-									<!--El codigo como anotacion funciona para habilitar la seccion del vendedor-->
-									<select id="salesman_id" name="salesman_id"> 
+									<input type="hidden" name="salesman_id" value="<!--<?php echo user_id();?>">
+									<!--El codigo como anotacion funciona para habilitar la seccion del vendedor-->									<select id="salesman_id" name="salesman_id"> 
 										<option value=""> <?php echo trans('text_select_salesman');?></option>
 										<?php foreach (get_salesmans() as $salesman) : ?>
 											<option value="<?php echo $salesman['id']; ?>" <?php echo store('salesman_id') == $salesman['id'] ? 'selected' : null; ?>>
@@ -406,12 +405,14 @@ if ($order_printer_ids) {
 													</td>
 												</tr>
 												<tr class="pay-top">
+													<!--CODIGO DE DESCUENTO EN VALOR ENTERO-->
 													<td>
-														<?php echo trans('label_discount'); ?>
+														<?php echo trans('label_discount'); ?> (%)
 													</td>
 													<td class="text-right">
-														<input id="discount-input" ng-change="addDiscount()" onClick="this.select();" type="text" name="discount-amount" ng-model="discountInput" ondrop="return false;" onpaste="return false;" autocomplete="off">
+														<input id="discount-input" ng-change="addDiscount()" onClick="this.select();" type="text" name="discount-amount" ng-model="discountInput"   ondrop="return false;" onpaste="return false;" autocomplete="off">
 													</td>
+													<!--CODIGO DE SUNA DE IMPUESTO EN %-->
 													<td>
 														<?php echo trans('label_tax_amount'); ?> (%)
 													</td>

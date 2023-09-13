@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -28,7 +28,7 @@ $loan_model = registry()->get('loader')->model('loan');
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -42,7 +42,7 @@ if (from()) {
 }
 $table = 'loan_payments';
 $table = "(SELECT loan_payments.* FROM loan_payments WHERE $where_query) as loan_payments";
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 // indexes
@@ -82,7 +82,7 @@ $Hooks->do_action('After_Showing_Loan_Payment_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */
  

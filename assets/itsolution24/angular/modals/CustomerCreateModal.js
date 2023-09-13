@@ -29,7 +29,7 @@ window.angularApp.factory("CustomerCreateModal", ["API_URL", "window", "jQuery",
                    window.swal("Oops!", response.data.errorMsg, "error");
                 });
 
-                // Submit Customer Form
+                // Enviar formulario de cliente
                 $(document).delegate("#create-customer-submit", "click", function(e) {
                     e.stopImmediatePropagation();
                     e.stopPropagation();
@@ -57,7 +57,7 @@ window.angularApp.factory("CustomerCreateModal", ["API_URL", "window", "jQuery",
                         alertMsg += "</div>";
                         form.find(".box-body").before(alertMsg);
 
-                        // Alert
+                        // Alerta
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
@@ -69,17 +69,17 @@ window.angularApp.factory("CustomerCreateModal", ["API_URL", "window", "jQuery",
                             $(document).find("input[name=\"customer-name\"]").val(response.data.customer_name + ' (' + response.data.customer_contact + ')');
                             $(document).find("input[name=\"customer-id\"]").val(response.data.id);
 
-                            // increase customer count
+                            // Aumentar el número de clientes
                             var customerCount = $(document).find("#customer-count h3");
                             if (customerCount) {
                                 customerCount.text(parseInt(customerCount.text()) + 1);
                             }
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeCustomerCreateModal();
                             $(document).find(".close").trigger("click");
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.CustomerCreateModalCallback) {
                                 $scope.CustomerCreateModalCallback($scope);
                             }

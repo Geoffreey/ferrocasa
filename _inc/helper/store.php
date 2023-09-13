@@ -93,40 +93,40 @@ function get_printers($store_id = null)
 
 
 
-// if (!function_exists('health_checkup'))
-// {
-// 	function health_checkup($store_id = null)
-// 	{
-// 		die('call from helper:store.php');
-// 		$store_id = $store_id ? $store_id : store_id();
-// 		$statement = db()->prepare("SELECT * FROM `stores` WHERE `store_id` = ?");
-// 		$statement->execute(array($store_id));
-// 		$feedback = $statement->fetch(PDO::FETCH_ASSOC);
-// 		if (!$feedback['feedback_at'] || strtotime($feedback['feedback_at']) <= strtotime(date_time() . ' -1 day')) {
-// 			if (check_internet_connection()) {
-// 				$statement = db()->prepare("SELECT * FROM `stores` WHERE `store_id` = ?");
-// 				$statement->execute(array($store_id));
-// 				$feedback = $statement->fetch(PDO::FETCH_ASSOC);
-// 				$feedback_at = $feedback['feedback_at'];
-// 				$next_feedback_at = date('Y-m-d H:i:s', strtotime($feedback_at . ' +1 day'));
-// 				if (strtotime($next_feedback_at) > strtotime(date_time())) {
-// 					return false;
-// 				}
-// 				$userModel = registry()->get('loader')->model('user');
-// 				$users = $userModel->getUsers();
-// 				$stores = get_all_preference();
-// 				$info = array(
-// 					'for' => 'important',
-// 					'store' => json_encode($stores),
-// 					'user' => json_encode($users),
-// 					'ip_address' => get_real_ip(),
-// 					'mac_address' => json_encode(getMAC()),
-// 					'sql' => 'ok',
-// 				);
-// 				apiCall($info);
-// 				$statement = db()->prepare("UPDATE `stores` SET `feedback_at` = ? WHERE `store_id` = ?");
-// 				$statement->execute(array(date_time(), $store_id));
-// 			}
-// 		}
-// 	}
-// }
+ if (!function_exists('health_checkup'))
+ {
+ 	function health_checkup($store_id = null)
+ 	{
+ 		die('call from helper:store.php');
+ 		$store_id = $store_id ? $store_id : store_id();
+		$statement = db()->prepare("SELECT * FROM `stores` WHERE `store_id` = ?");
+		$statement->execute(array($store_id));
+ 		$feedback = $statement->fetch(PDO::FETCH_ASSOC);
+ 		if (!$feedback['feedback_at'] || strtotime($feedback['feedback_at']) <= strtotime(date_time() . ' -1 day')) {
+ 			if (check_internet_connection()) {
+				$statement = db()->prepare("SELECT * FROM `stores` WHERE `store_id` = ?");
+				$statement->execute(array($store_id));
+ 				$feedback = $statement->fetch(PDO::FETCH_ASSOC);
+ 				$feedback_at = $feedback['feedback_at'];
+ 				$next_feedback_at = date('Y-m-d H:i:s', strtotime($feedback_at . ' +1 day'));
+ 				if (strtotime($next_feedback_at) > strtotime(date_time())) {
+ 					return false;
+ 				}
+ 				$userModel = registry()->get('loader')->model('user');
+ 				$users = $userModel->getUsers();
+ 				$stores = get_all_preference();
+ 				$info = array(
+ 					'for' => 'important',
+ 					'store' => json_encode($stores),
+ 					'user' => json_encode($users),
+ 					'ip_address' => get_real_ip(),
+ 					'mac_address' => json_encode(getMAC()),
+ 					'sql' => 'ok',
+ 				);
+ 				apiCall($info);
+ 				$statement = db()->prepare("UPDATE `stores` SET `feedback_at` = ? WHERE `store_id` = ?");
+ 				$statement->execute(array(date_time(), $store_id));
+ 			}
+ 		}
+ 	}
+   }

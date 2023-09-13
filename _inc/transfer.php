@@ -27,7 +27,7 @@ $user_id = user_id();
 // LOAD MODEL
 $transfer_model = registry()->get('loader')->model('transfer');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate items
@@ -40,7 +40,7 @@ function validate_request_data($request)
     throw new Exception(trans('error_products'));
   }
 
-  // Validate status
+  // Validar estado
   if (!validateString($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
@@ -294,7 +294,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_transfer')) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -411,7 +411,7 @@ if (isset($request->get['id']) AND isset($request->get['action_type']) && $reque
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -442,10 +442,10 @@ if (isset($request->get['type']) && $request->get['type'] == 'receive') {
   $where_query .= " AND transfers.from_store_id = $store_id";
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT transfers.* FROM transfers WHERE $where_query) as transfers";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 // indexes
@@ -524,7 +524,7 @@ $Hooks->do_action('Aftere_Showing_Transfer_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */
  

@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -36,7 +36,7 @@ function validate_customer_request_data($request)
     }
   }
 
-  // Validate customer id
+  // Validar identificación del cliente
   if (!validateInteger($request->post['customer-id'])) {
     throw new Exception(trans('error_invoice_customer'));
   }
@@ -52,7 +52,7 @@ function validate_invoice_items($invoice_items)
       throw new Exception(trans('error_invoice_product_type'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (!validateInteger($product['item_id'])) {
       throw new Exception(trans('error_invalid_product_id'));
     }

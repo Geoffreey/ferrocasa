@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_brand')) {
 // LOAD SUPPLIER MODEL
 $brand_model = registry()->get('loader')->model('brand');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate brand name
@@ -47,12 +47,12 @@ function validate_request_data($request)
     throw new Exception(trans('error_store'));
   }
 
-  // Validate status
+  // Validar estado
   if (!is_numeric($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
 
-  // Validate sort order
+  // Validar orden de clasificación
   if (!is_numeric($request->post['sort_order'])) {
     throw new Exception(trans('error_sort_order'));
   }
@@ -81,7 +81,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -124,19 +124,19 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_brand')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (empty($request->post['brand_id'])) {
       throw new Exception(trans('error_brand_id'));
     }
 
     $id = $request->post['brand_id'];
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -167,7 +167,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_brand')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -270,20 +270,20 @@ if (isset($request->get['brand_id']) && isset($request->get['action_type']) && $
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 $Hooks->do_action('Before_Showing_Brand_List');
 
 $where_query = 'b2s.store_id = ' . store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT brands.*, b2s.status, b2s.sort_order FROM brands 
   LEFT JOIN brand_to_store b2s ON (brands.brand_id = b2s.brand_id) 
   WHERE $where_query GROUP by brands.brand_id
   ) as brands";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'brand_id';
 
 $columns = array(
@@ -356,6 +356,6 @@ $Hooks->do_action('After_Showing_Brand_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

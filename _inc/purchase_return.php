@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include '../_init.php';
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -292,7 +292,7 @@ if (isset($request->get['invoice_id']) && $request->get['action_type'] == 'VIEW'
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -305,11 +305,11 @@ if (from()) {
     $where_query .= date_range_purchase_return_filter($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT purchase_returns.* FROM `purchase_returns` 
   WHERE $where_query) as purchase_returns";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -401,6 +401,6 @@ $Hooks->do_action('Before_Showing_Purchase_Return_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

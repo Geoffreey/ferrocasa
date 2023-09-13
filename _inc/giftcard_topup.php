@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -31,7 +31,7 @@ $giftcard_model = registry()->get('loader')->model('giftcard');
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) && $request->post['action_type'] == 'DELETE') {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_giftcard_topup')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -121,7 +121,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -135,11 +135,11 @@ if (from()) {
   $where_query .= date_range_giftcard_topup_filter($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT gift_card_topups.* FROM gift_card_topups 
         WHERE $where_query) as gift_card_topups";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 $columns = array(
   array(
@@ -195,6 +195,6 @@ $Hooks->do_action('After_Showing_Giftcard_Topup_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

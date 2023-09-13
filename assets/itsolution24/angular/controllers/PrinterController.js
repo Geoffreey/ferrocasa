@@ -170,22 +170,22 @@ function (
                     doc.defaultStyle.fontSize = 8;
                     doc.styles.tableHeader.fontSize = 8;doc.styles.tableHeader.alignment = "left";
                     doc.styles.title.fontSize = 10;
-                    // Remove spaces around page title
+                    // Eliminar espacios alrededor del título de la página
                     doc.content[0].text = doc.content[0].text.trim();
-                    // Header
+                    // Encabezado
                     doc.content.splice( 1, 0, {
                         margin: [ 0, 0, 0, 12 ],
                         alignment: 'center',
                         fontSize: 8,
                         text: 'Printed on: '+window.formatDate(new Date()),
                     });
-                    // Create a footer
+                    // Crear un pie de página
                     doc['footer']=(function(page, pages) {
                         return {
                             columns: [
                                 'Powered by web.ferrocasa.pw',
                                 {
-                                    // This is the right column
+                                    // Esta es la columna de la derecha
                                     alignment: 'right',
                                     text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }]
                                 }
@@ -193,21 +193,21 @@ function (
                             margin: [10, 0]
                         };
                     });
-                    // Styling the table: create style object
+                    // Esta es la columna de la derecha
                     var objLayout = {};
-                    // Horizontal line thickness
+                    // Grosor de la línea horizontal
                     objLayout['hLineWidth'] = function(i) { return 0.5; };
-                    // Vertikal line thickness
+                    // Grosor de la línea vertical
                     objLayout['vLineWidth'] = function(i) { return 0.5; };
-                    // Horizontal line color
+                    // Color de línea horizontal
                     objLayout['hLineColor'] = function(i) { return '#aaa'; };
-                    // Vertical line color
+                    // Color de línea vertical
                     objLayout['vLineColor'] = function(i) { return '#aaa'; };
-                    // Left padding of the cell
+                    // Relleno izquierdo de la celda.
                     objLayout['paddingLeft'] = function(i) { return 4; };
-                    // Right padding of the cell
+                    // Relleno derecho de la celda.
                     objLayout['paddingRight'] = function(i) { return 4; };
-                    // Inject the object in the document
+                    // Inyectar el objeto en el documento.
                     doc.content[1].layout = objLayout;
                 }
             }
@@ -215,7 +215,7 @@ function (
     });
 
     //================
-    // End datatable
+    // Finalizar tabla de datos
     //================
 
     // Create printer
@@ -252,7 +252,7 @@ function (
                 }
             }, false);
 
-            // Reset form
+            // Restablecer formulario
             $("#reset").trigger("click");
             $("#printer_sex").val(null).trigger("change");
 
@@ -309,7 +309,7 @@ function (
         });
     });
 
-    // Open edit modal dialog box by query string
+    // Abrir cuadro de diálogo modal de edición por cadena de consulta
     if (window.getParameterByName("printer_id") && window.getParameterByName("printer_name")) {
         printerId = window.getParameterByName("printer_id");
         var printerName = window.getParameterByName("printer_name");

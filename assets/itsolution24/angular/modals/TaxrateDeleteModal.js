@@ -69,7 +69,7 @@ window.angularApp.factory("TaxrateDeleteModal", ["API_URL", "window", "jQuery", 
                             $(document).find(".close").trigger("click");
                         });
 
-                        // Callback
+                        // Devolver la llamada
                         if ($scope.TaxrateDeleteModalCallback) {
                             $scope.TaxrateDeleteModalCallback($scope);
                         }

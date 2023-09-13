@@ -44,20 +44,20 @@ if ($from) {
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */
 
 $Hooks->do_action('Before_Showing_Collection_Report');
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT selling_info.info_id, selling_info.created_by FROM selling_info 
   LEFT JOIN selling_price ON (selling_info.invoice_id = selling_price.invoice_id)
   WHERE $where_query
   GROUP BY selling_info.created_by
   ORDER BY selling_info.invoice_id DESC) as selling_info";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 // indexes
@@ -177,6 +177,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

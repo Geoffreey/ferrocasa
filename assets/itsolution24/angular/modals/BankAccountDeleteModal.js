@@ -69,7 +69,7 @@ window.angularApp.factory("BankAccountDeleteModal", ["API_URL", "window", "jQuer
                             $(document).find(".close").trigger("click");
                         });
 
-                        // Callback
+                        // Devolver la llamada
                         if ($scope.BankAccountDeleteModalCallback) {
                             $scope.BankAccountDeleteModalCallback($scope);
                         }

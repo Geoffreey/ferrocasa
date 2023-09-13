@@ -304,9 +304,9 @@ function (
             $scope.discountAmount = 0;
             $scope.discountInput = 0;
         } else {
-            $scope.discountAmount = parseFloat($scope.discountInput);
+            $scope.discountAmount = parseFloat ($scope.discountInput);
         }
-    };
+    }; //msitan@frater.org, dapen@frater.org
     $scope._calcTaxAmount = function () {
         if ($scope.taxInput < 1 || $scope.taxInput > 100) {
             $scope.taxAmount = 0;
@@ -368,7 +368,8 @@ function (
         if ($scope.discountType == 'percentage') {
             discountPercentage =  parseFloat($scope._percentage($scope.payable, $scope.discountAmount));
         } else {
-            discountPercentage =  parseFloat($scope.discountAmount);
+            discountPercentage =  parseFloat($scope._percentage($scope.payable, $scope.discountAmount));
+            //discountPercentage =  parseFloat($scope.discountAmount);
         }
 
         if ($scope.shippingType == 'percentage') {
@@ -685,7 +686,7 @@ function (
                 $scope.othersCharge = response.data.order.others_charge;
                 window.angular.forEach(response.data.items, function(productItem) {
                     if (productItem) {
-                        // console.log(productItem);
+                        console.log(productItem);
                         var item = [];
                         item.isSingleProduct = false;
                         item.id = productItem.item_id;

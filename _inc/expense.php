@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -26,7 +26,7 @@ $user_id = user_id();
 
 $ref_prefix = 'EXP';
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
     // Validate category id
@@ -39,7 +39,7 @@ function validate_request_data($request)
       throw new Exception(trans('error_title'));
     }
 
-    // Validate amount
+    // Validar importe
     if (!validateFloat($request->post['amount'])) {
       throw new Exception(trans('error_amount'));
     }
@@ -55,12 +55,12 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'create_expense')) {
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate attachment
@@ -143,7 +143,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_expense')) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -158,7 +158,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_title'));
     }
 
-    // Validate amount
+    // Validar importe
     if (!validateFloat($request->post['amount'])) {
       throw new Exception(trans('error_amount'));
     }
@@ -273,7 +273,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_expense')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -405,7 +405,7 @@ if (isset($request->get['id']) AND isset($request->get['action_type']) && $reque
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -418,12 +418,12 @@ if (from()) {
   $where_query .= date_range_expense_filter($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT * FROM expenses 
   WHERE $where_query GROUP by id
   ) as expenses";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -496,6 +496,6 @@ $Hooks->do_action('After_Showing_Expense_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

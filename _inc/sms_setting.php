@@ -21,7 +21,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_disabled_in_demo'));
     }
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_sms_setting')) {
       throw new Exception(trans('error_update_permission'));
     }

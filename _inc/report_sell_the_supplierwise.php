@@ -26,7 +26,7 @@ $store_id = store_id();
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -40,14 +40,14 @@ if (from()) {
   $where_query .= date_range_filter($from, $to);
 }
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT selling_info.invoice_id, selling_info.created_at, selling_item.id, selling_item.sup_id, selling_item.item_name, selling_item.item_quantity as total_item, selling_item.item_discount as discount, selling_item.item_tax as tax, selling_item.item_purchase_price as purchase_price, selling_item.item_total as sell_price FROM selling_item 
   LEFT JOIN selling_info ON (selling_item.invoice_id = selling_info.invoice_id)
   LEFT JOIN selling_price ON (selling_item.invoice_id = selling_price.invoice_id)
   WHERE $where_query
   ORDER BY sell_price DESC) as selling_item";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -121,6 +121,6 @@ echo json_encode(
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

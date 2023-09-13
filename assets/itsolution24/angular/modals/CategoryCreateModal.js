@@ -60,7 +60,7 @@ window.angularApp.factory("CategoryCreateModal", ["API_URL", "window", "jQuery",
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeCategoryCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -81,7 +81,7 @@ window.angularApp.factory("CategoryCreateModal", ["API_URL", "window", "jQuery",
                                 categoryCount.text(parseInt(categoryCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.CategoryCreateModalCallback) {
                                 $scope.CategoryCreateModalCallback($scope);
                             }

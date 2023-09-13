@@ -58,7 +58,7 @@ window.angularApp.factory("CustomerEditModal", ["API_URL", "window", "jQuery", "
                         alertMsg += "</div>";
                         form.find(".box-body").before(alertMsg);
 
-                        // Alert
+                        // Alerta
                         window.swal({
                           title: "Success!",
                           text: response.data.msg,
@@ -82,7 +82,7 @@ window.angularApp.factory("CustomerEditModal", ["API_URL", "window", "jQuery", "
                                 $(datatable).DataTable().ajax.reload(null, false);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.CustomerEditModalCallback) {
                                 $scope.CustomerEditModalCallback($scope);
                             }

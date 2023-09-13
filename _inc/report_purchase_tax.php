@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -30,7 +30,7 @@ $invoice_model = registry()->get('loader')->model('invoice');
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -41,10 +41,10 @@ $from = from();
 $to = to();
 $where_query .= date_range_filter2($from, $to);
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT purchase_info.*, purchase_price.item_tax, purchase_price.order_tax FROM `purchase_info` LEFT JOIN `purchase_price` ON (purchase_info.invoice_id = purchase_price.invoice_id) WHERE $where_query) as purchase_info";
 
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'info_id';
 
 $columns = array(
@@ -88,6 +88,6 @@ $Hooks->do_action('After_Showing_purchase_Tax_Report');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

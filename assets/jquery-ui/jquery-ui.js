@@ -299,7 +299,7 @@ $.Widget.prototype = {
 		classes: {},
 		disabled: false,
 
-		// Callbacks
+		// Devolver la llamadas
 		create: null
 	},
 
@@ -2057,7 +2057,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		stack: false,
 		zIndex: false,
 
-		// Callbacks
+		// Devolver la llamadas
 		drag: null,
 		start: null,
 		stop: null
@@ -3267,7 +3267,7 @@ $.widget( "ui.droppable", {
 		scope: "default",
 		tolerance: "intersect",
 
-		// Callbacks
+		// Devolver la llamadas
 		activate: null,
 		deactivate: null,
 		drop: null,
@@ -3767,7 +3767,7 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		// See #7960
 		zIndex: 90,
 
-		// Callbacks
+		// Devolver la llamadas
 		resize: null,
 		start: null,
 		stop: null
@@ -4932,7 +4932,7 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 		filter: "*",
 		tolerance: "touch",
 
-		// Callbacks
+		// Devolver la llamadas
 		selected: null,
 		selecting: null,
 		start: null,
@@ -5246,7 +5246,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		tolerance: "intersect",
 		zIndex: 1000,
 
-		// Callbacks
+		// Devolver la llamadas
 		activate: null,
 		beforeStop: null,
 		change: null,
@@ -6777,7 +6777,7 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 			header: "ui-icon-triangle-1-e"
 		},
 
-		// Callbacks
+		// Devolver la llamadas
 		activate: null,
 		beforeActivate: null
 	},
@@ -7369,7 +7369,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 		},
 		role: "menu",
 
-		// Callbacks
+		// Devolver la llamadas
 		blur: null,
 		focus: null,
 		select: null
@@ -8023,7 +8023,7 @@ $.widget( "ui.autocomplete", {
 		},
 		source: null,
 
-		// Callbacks
+		// Devolver la llamadas
 		change: null,
 		close: null,
 		focus: null,
@@ -11738,7 +11738,7 @@ $.widget( "ui.dialog", {
 		title: null,
 		width: 300,
 
-		// Callbacks
+		// Devolver la llamadas
 		beforeClose: null,
 		close: null,
 		drag: null,
@@ -12800,7 +12800,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		},
 		width: false,
 
-		// Callbacks
+		// Devolver la llamadas
 		change: null,
 		close: null,
 		focus: null,
@@ -13467,7 +13467,7 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 		value: 0,
 		values: null,
 
-		// Callbacks
+		// Devolver la llamadas
 		change: null,
 		slide: null,
 		start: null,
@@ -14755,7 +14755,7 @@ $.widget( "ui.tabs", {
 		hide: null,
 		show: null,
 
-		// Callbacks
+		// Devolver la llamadas
 		activate: null,
 		beforeActivate: null,
 		beforeLoad: null,
@@ -15671,7 +15671,7 @@ $.widget( "ui.tooltip", {
 		show: true,
 		track: false,
 
-		// Callbacks
+		// Devolver la llamadas
 		close: null,
 		open: null
 	},

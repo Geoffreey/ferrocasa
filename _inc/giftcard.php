@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return error
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_giftcard')) {
 // LOAD GIFTCARD MODEL
 $giftcard_model = registry()->get('loader')->model('giftcard');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) {
 
   // Giftcard name validation
@@ -71,7 +71,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_add_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Giftcard code validation
@@ -126,7 +126,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_giftcard')) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -138,7 +138,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 
     $id = $request->post['id'];
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -168,7 +168,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['actio
 if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->post['action_type']) && $request->post['action_type'] == 'DELETE') {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_giftcard')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -300,16 +300,16 @@ if (isset($request->get['id']) AND isset($request->get['action_type']) && $reque
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
 $Hooks->do_action('Before_Showing_Giftcard_List');
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "gift_cards";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 $columns = array(
   array(
@@ -400,6 +400,6 @@ $Hooks->do_action('After_Showing_Giftcard_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

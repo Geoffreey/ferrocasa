@@ -6165,7 +6165,7 @@
 		// Run the sort by calling a full redraw
 		_fnReDraw( settings );
 	
-		// callback used for async user interaction
+		// Devolver la llamada used for async user interaction
 		if ( typeof callback == 'function' ) {
 			callback( settings );
 		}

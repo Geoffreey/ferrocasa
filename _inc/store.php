@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_store')) {
 // LOAD STORE MODEL
 $store_model = registry()->get('loader')->model('store');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
 
@@ -187,7 +187,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_read_permission'));
     }
     
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate logo url
@@ -330,7 +330,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_store')) {
       throw new Exception(trans('error_update_permission'));
     }
@@ -346,7 +346,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -378,7 +378,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_store') || DEMO) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -511,26 +511,26 @@ if (isset($request->get['store_id']) AND isset($request->get['action_type']) && 
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
  
  $Hooks->do_action('Before_Showing_Store_List');
 
-// DB table to use
+// tabla de base de datos a utilizar
 $where_query = '1=1';
 
 if (!is_admin()) {
   $where_query = 'u2s.user_id = ' . user_id();
 }
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT stores.* FROM stores 
   LEFT JOIN user_to_store u2s ON (stores.store_id = u2s.store_id) 
   WHERE $where_query GROUP by stores.store_id
   ) as stores";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'store_id';
  
 $columns = array(
@@ -614,6 +614,6 @@ $Hooks->do_action('After_Showing_Store_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

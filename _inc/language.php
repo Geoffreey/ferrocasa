@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -32,7 +32,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' AND isset($request->get['action
       throw new Exception(trans('error_disabled_in_demo'));
     }
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'language_translation')) {
       throw new Exception(trans('error_delete_language_key'));
     }
@@ -92,7 +92,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
       throw new Exception(trans('error_disabled_in_demo'));
     }
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_language_key')) {
       throw new Exception(trans('error_delete_language_key'));
     }
@@ -114,7 +114,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
   }
 }
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) {
 
   // Name validation
@@ -148,7 +148,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'create_language')) {
       throw new Exception(trans('error_language_create_permission'));
     }
@@ -181,7 +181,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'update_language')) {
       throw new Exception(trans('error_language_update_permission'));
     }
@@ -220,7 +220,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
       throw new Exception(trans('error_disabled_in_demo'));
     }
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_language')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -264,7 +264,7 @@ if (isset($request->get['lang_id']) && isset($request->get['action_type']) && $r
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -285,14 +285,14 @@ if (isset($request->get['key_type']) && $request->get['key_type'] == 'default') 
 if (isset($request->get['action_type']) && $request->get['action_type'] == 'empty_value') {
   $where_query .= " AND L.lang_value IS NULL";
 }
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT * FROM language_translations L WHERE {$where_query}) as language_translations";
 
 if (isset($request->get['action_type']) && $request->get['action_type'] == 'dublicate_entry') {
   $table = "(SELECT L.id as id,  L.lang_id as lang_id, L.lang_key as lang_key, L.key_type as key_type, L.lang_value as lang_value FROM language_translations L WHERE {$where_query} GROUP BY L.lang_key HAVING COUNT(lang_key) > 1) as language_translations";
 }
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
  
 $columns = array(
@@ -345,6 +345,6 @@ $Hooks->do_action('After_Showing_Language_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

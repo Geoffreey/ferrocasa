@@ -64,7 +64,7 @@ window.angularApp.factory("GiftcardCreateModal", ["API_URL", "window", "jQuery",
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeGiftcardCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -86,7 +86,7 @@ window.angularApp.factory("GiftcardCreateModal", ["API_URL", "window", "jQuery",
                                 giftcardCount.text(parseInt(giftcardCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.GiftcardCreateModalCallback) {
                                 $scope.GiftcardCreateModalCallback($scope);
                             }

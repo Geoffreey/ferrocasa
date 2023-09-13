@@ -2,7 +2,7 @@
 function get_total_income($from=null, $to=null, $store_id=null) 
 {	
 	$income_model = registry()->get('loader')->model('income');
-	return $income_model->getTotalIncome($from, $to, $store_id);
+	return $income_model->getTotalIncome($from, $to, $store_id);;
 }
 
 function get_total_substract_income($from=null, $to=null, $store_id=null) 

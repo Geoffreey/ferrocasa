@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include ("../_init.php");
 
-// Check, if user logged in or not
+// Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
 if (!is_loggedin()) {
   header('HTTP/1.1 422 Unprocessable Entity');
@@ -23,7 +23,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_user_log')) {
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -32,10 +32,10 @@ $Hooks->do_action('Before_Showing_User_Log');
 $user_id = $request->get['user_id'];
 $where_query = "user_id = '{$user_id}'";
 
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT login_logs.* FROM login_logs WHERE $where_query) as login_logs";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'id';
 
 $columns = array(
@@ -66,6 +66,6 @@ $Hooks->do_action('After_Showing_User_Log');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */

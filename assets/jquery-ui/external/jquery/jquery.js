@@ -9480,7 +9480,7 @@ jQuery.extend( {
 			// Create the final options object
 			s = jQuery.ajaxSetup( {}, options ),
 
-			// Callbacks context
+			// Devolver la llamadas context
 			callbackContext = s.context || s,
 
 			// Context for global events is callbackContext if it is a DOM node or jQuery collection
@@ -9496,7 +9496,7 @@ jQuery.extend( {
 			// Status-dependent callbacks
 			statusCode = s.statusCode || {},
 
-			// Headers (they are sent all at once)
+			// Encabezados (they are sent all at once)
 			requestHeaders = {},
 			requestHeadersNames = {},
 
@@ -9749,7 +9749,7 @@ jQuery.extend( {
 			}
 		}
 
-		// Callback for when everything is done
+		// Devolver la llamada for when everything is done
 		function done( status, nativeStatusText, responses, headers ) {
 			var isSuccess, success, error, response, modified,
 				statusText = nativeStatusText;
@@ -10425,7 +10425,7 @@ jQuery.ajaxTransport( "script", function( s ) {
 						// Dereference the script
 						script = null;
 
-						// Callback if not abort
+						// Devolver la llamada if not abort
 						if ( !isAbort ) {
 							callback( 200, "success" );
 						}

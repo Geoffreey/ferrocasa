@@ -68,8 +68,8 @@ class ModelProduct extends Model
 
 			//--- product to store ---//
 
-				$statement = $this->db->prepare("INSERT INTO `product_to_store` SET `product_id` = ?, `store_id` = ?, `purchase_price` = ?, `sell_price` = ?, `sup_id` = ?, `brand_id` = ?, `box_id` = ?, `taxrate_id` = ?, `tax_method` = ?, `preference` = ?, `e_date` = ?, `alert_quantity` = ?, `p_date` = ?");
-				$statement->execute(array($product_id, $store_id, $data['purchase_price'], $data['sell_price'], $data['sup_id'], $data['brand_id'], $data['box_id'], $data['taxrate_id'], $data['tax_method'], $preference, $data['e_date'], $data['alert_quantity'], date('Y-m-d')));
+				$statement = $this->db->prepare("INSERT INTO `product_to_store` SET `product_id` = ?, `store_id` = ?, `purchase_price` = ?, `sell_price` = ?, `sup_id` = ?, `category_id` = ?, `brand_id` = ?, `box_id` = ?, `taxrate_id` = ?, `tax_method` = ?, `preference` = ?, `e_date` = ?, `alert_quantity` = ?, `p_date` = ?");
+				$statement->execute(array($product_id, $store_id, $data['purchase_price'], $data['sell_price'], $data['sup_id'], $data['category:id'], $data['brand_id'], $data['box_id'], $data['taxrate_id'], $data['tax_method'], $preference, $data['e_date'], $data['alert_quantity'], date('Y-m-d')));
 			}
 		}
 
@@ -179,13 +179,13 @@ class ModelProduct extends Model
 			    $statement->execute(array($store_id, $product_id));
 			    $product = $statement->fetch(PDO::FETCH_ASSOC);
 			    if (!$product) {
-			    	$statement = $this->db->prepare("INSERT INTO `product_to_store` SET `product_id` = ?, `store_id` = ?, `sup_id` = ?, `brand_id` = ?, `box_id` = ?, `taxrate_id` = ?, `tax_method` = ?, `preference` = ?, `sell_price` = ?, `e_date` = ?, `alert_quantity` = ?, `p_date` = ?");
-					$statement->execute(array($product_id, $store_id, $data['sup_id'], $data['brand_id'], $data['box_id'], $data['taxrate_id'], $data['tax_method'], $preference, $data['sell_price'], $data['e_date'], $data['alert_quantity'], date('Y-m-d')));
+			    	$statement = $this->db->prepare("INSERT INTO `product_to_store` SET `product_id` = ?, `store_id` = ?, `sup_id` = ?, `category_id` = ?,`brand_id` = ?, `box_id` = ?, `taxrate_id` = ?, `tax_method` = ?, `preference` = ?, `sell_price` = ?, `e_date` = ?, `alert_quantity` = ?, `p_date` = ?");
+					$statement->execute(array($product_id, $store_id, $data['sup_id'], $data['category_id'],$data['brand_id'], $data['box_id'], $data['taxrate_id'], $data['tax_method'], $preference, $data['sell_price'], $data['e_date'], $data['alert_quantity'], date('Y-m-d')));
 			    
 			    } else {
 
-			    	$statement = $this->db->prepare("UPDATE `product_to_store` SET `sup_id` = ?, `brand_id` = ?, `box_id` = ?, `taxrate_id` = ?, `tax_method` = ?, `preference` = ?, `purchase_price` = ?, `sell_price` = ?, `e_date` = ?, `alert_quantity` = ? WHERE `store_id` = ? AND `product_id` = ?");
-					$statement->execute(array($data['sup_id'], $data['brand_id'], $data['box_id'], $data['taxrate_id'], $data['tax_method'], $preference, $data['purchase_price'], $data['sell_price'], $data['e_date'], $data['alert_quantity'], $store_id, $product_id));
+			    	$statement = $this->db->prepare("UPDATE `product_to_store` SET `sup_id` = ?, `category_id` = ?, `brand_id` = ?, `box_id` = ?, `taxrate_id` = ?, `tax_method` = ?, `preference` = ?, `purchase_price` = ?, `sell_price` = ?, `e_date` = ?, `alert_quantity` = ? WHERE `store_id` = ? AND `product_id` = ?");
+					$statement->execute(array($data['sup_id'], $data['category_id'], $data['brand_id'], $data['box_id'], $data['taxrate_id'], $data['tax_method'], $preference, $data['purchase_price'], $data['sell_price'], $data['e_date'], $data['alert_quantity'], $store_id, $product_id));
 			    }
 
 			    $store_ids[] = $store_id;
@@ -330,6 +330,7 @@ class ModelProduct extends Model
 	    $product['stores'] = $stores;
 	    
 	    $product['sup_name'] = get_the_supplier($product['sup_id'],'sup_name');
+		$product['category_name'] = get_the_category($product['category_id'],'category_name');
 	    $product['brand_name'] = get_the_brand($product['brand_id'],'brand_name');
 	    $product['unit'] = get_the_unit($product['unit_id'],'unit_name');
 	    $product['taxrate'] = '';
@@ -349,6 +350,7 @@ class ModelProduct extends Model
 		$sql = "SELECT * FROM `products` p 
 			LEFT JOIN `product_to_store` p2s ON (`p`.`p_id` = `p2s`.`product_id`) 
 			LEFT JOIN `suppliers` s ON (`p2s`.`sup_id` = `s`.`sup_id`) 
+			LEFT JOIN `catedorys` p ON (`p`.`catedory_id` = `p`.`category_id`)
 			LEFT JOIN `brands` b ON (`p2s`.`brand_id` = `b`.`brand_id`) 
 			LEFT JOIN `boxes` bx ON (`p2s`.`box_id` = `bx`.`box_id`) 
 			LEFT JOIN `taxrates` tr ON (`p2s`.`taxrate_id` = `tr`.`taxrate_id`) 
@@ -359,7 +361,7 @@ class ModelProduct extends Model
 		}	
 
 		if (isset($data['filter_category_id'])) {
-			$sql .= " AND `p`.`category_id` = '" . $data['filter_category_id'] . "'";
+			$sql .= " AND `products`.`category_id` = '%" . $data['filter_category_id'] . "'";
 		}
 
 		if (isset($data['filter_brand_id'])) {

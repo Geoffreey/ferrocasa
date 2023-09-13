@@ -60,7 +60,7 @@ window.angularApp.factory("LoanCreateModal", ["API_URL", "window", "jQuery", "$h
                         window.swal("Success", response.data.msg, "success")
                         .then(function(value) {
 
-                            // close modalwindow
+                            // Cerrar ventana modal
                             $scope.closeLoanCreateModal();
                             $(document).find(".close").trigger("click");
 
@@ -82,7 +82,7 @@ window.angularApp.factory("LoanCreateModal", ["API_URL", "window", "jQuery", "$h
                                 taxrateCount.text(parseInt(taxrateCount.text()) + 1);
                             }
 
-                            // Callback
+                            // Devolver la llamada
                             if ($scope.LoanCreateModalCallback) {
                                 $scope.LoanCreateModalCallback($scope);
                             }

@@ -24,7 +24,7 @@ if (user_group_id() != 1 && !has_permission('access', 'read_supplier')) {
 // LOAD SUPPLIER MODEL
 $supplier_model = registry()->get('loader')->model('supplier');
 
-// Validate post data
+// Validar datos de publicación
 function validate_request_data($request) 
 {
   // Validate supplier name
@@ -59,12 +59,12 @@ function validate_request_data($request)
     throw new Exception(trans('error_store'));
   }
 
-  // Validate status
+  // Validar estado
   if (!is_numeric($request->post['status'])) {
     throw new Exception(trans('error_status'));
   }
 
-  // Validate sort order
+  // Validar orden de clasificación
   if (!is_numeric($request->post['sort_order'])) {
     throw new Exception(trans('error_sort_order'));
   }
@@ -113,7 +113,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action
       throw new Exception(trans('error_create_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -157,12 +157,12 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check update permission
+    // Comprobar permiso de actualización
     if (user_group_id() != 1 && !has_permission('access', 'update_supplier')) {
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate product id
+    // Validar identificación del producto
     if (empty($request->post['sup_id'])) {
       throw new Exception(trans('error_sup_id'));
     }
@@ -173,7 +173,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
       throw new Exception(trans('error_update_permission'));
     }
 
-    // Validate post data
+    // Validar datos de publicación
     validate_request_data($request);
 
     // Validate existance
@@ -204,7 +204,7 @@ if($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['action_
 {
   try {
 
-    // Check delete permission
+    // Comprobar permiso de eliminación
     if (user_group_id() != 1 && !has_permission('access', 'delete_supplier')) {
       throw new Exception(trans('error_delete_permission'));
     }
@@ -316,7 +316,7 @@ if (isset($request->get['sup_id']) && isset($request->get['action_type']) && $re
 
 /**
  *===================
- * START DATATABLE
+ * INICIO DE TABLA DE DATOS
  *===================
  */
 
@@ -324,13 +324,13 @@ $Hooks->do_action('Before_Showing_Supplier_List');
 
 $where_query = 's2s.store_id = ' . store_id();
  
-// DB table to use
+// tabla de base de datos a utilizar
 $table = "(SELECT suppliers.*, s2s.status, s2s.sort_order FROM suppliers 
   LEFT JOIN supplier_to_store s2s ON (suppliers.sup_id = s2s.sup_id) 
   WHERE $where_query GROUP by suppliers.sup_id
   ) as suppliers";
  
-// Table's primary key
+// Llave principal de la tabla
 $primaryKey = 'sup_id';
 
 $columns = array(
@@ -414,6 +414,6 @@ $Hooks->do_action('After_Showing_Supplier_List');
 
 /**
  *===================
- * END DATATABLE
+ * FIN TABLA DE DATOS
  *===================
  */
