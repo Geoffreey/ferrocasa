@@ -89,7 +89,7 @@
         </div>
         <div class="well well-sm product-well">
           <div filter-list="search_list">
-              <div class="stock-item" ng-repeat="product in productsArray" ng-click="addItemToTransferList(product.id, 1);" id="stock-item-{{ product.id }}" style="cursor:pointer;padding:5px 0;border-bottom: 1px dotted #ccc;:">
+              <div class="stock-item" ng-repeat="product in productsArray" ng-click="addItemToTransferList(product.id, 1);" id="stock-item-{{ product.id }}" style="cursor:pointer;padding:5px 0;border-bottom: 1px dotted #ccc;">
                   -- {{ product.item_name }}, <?php echo trans('text_invoice_id'); ?>: {{ product.invoice_id}}, <?php echo trans('text_stock'); ?>: <span class="badge badge-info">{{ product.quantity }}</span>
               </div>
           </div>
@@ -113,7 +113,7 @@
           <table class="table table-striped table-bordered">
             <tbody>
                 <tr class="info" ng-repeat="transferItem in transferItemArray">
-                  <td class="w-45" style="">{{ transferItem.item_name }}</td>
+                  <td class="w-45" >{{ transferItem.item_name }}</td>
                   <td class="w-25 text-center">{{ transferItem.invoice_id }}</td>
                   <td class="w-25 text-center">
                     <input id="id-{{ transferItem.id }}" type="hidden" name="items[{{ transferItem.id }}][id]" value="{{ transferItem.id }}">
