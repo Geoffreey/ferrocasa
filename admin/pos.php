@@ -223,13 +223,13 @@ if ($order_printer_ids) {
 											</span>	
 										</span>
                                          
-										    <li class="text-center item_price" id="item_price_{{ products.id }}"  value="{{ products.price | formatDecimal:2 }}" data-productId="{{ products.id }}">
+										    <ul class="text-center item_price" id="item_price_{{ products.id }}"  value="{{ products.price | formatDecimal:2 }}" data-productId="{{ products.id }}">
 											<strong>Q{{ products.sell_price | formatDecimal:2}}</strong>
-										    </li>
+										    </ul>
 										
-											<li class="text-center quantity_in_stock" id="quantity_in_stock_{{ products.id }}"  value="{{ products.quantity | formatDecimal:2 }}" data-productId="{{ products.id }}">
+											<ul class="text-center quantity_in_stock" id="quantity_in_stock_{{ products.id }}"  value="{{ products.quantity | formatDecimal:2 }}" data-productId="{{ products.id }}">
 												<strong><font color="red"> Stock: {{ products.quantity_in_stock | formatDecimal:0}} </font></strong>
-										    </li>
+										    </ul>
 										
 										<span class="item-mask nowrap" title="{{ products.p_name }}">
 											<svg class="svg-icon"><use href="#icon-add"></svg>
