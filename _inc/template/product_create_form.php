@@ -287,7 +287,7 @@ $tab_active = isset($request->get['tab']) ? $request->get['tab'] : 'general';
               <?php echo trans('label_product_cost'); ?><i class="required">*</i>
             </label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="purchase_price" name="purchase_price" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;" onKeyUp="if(this.value<0){this.value='1';}" required>
+              <input type="text" class="form-control" id="purchase_price" name="purchase_price" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;" onKeyUp="if(this.value<0){this.value='1';}" value="0" required>
             </div>
           </div>
 

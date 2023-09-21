@@ -51,7 +51,7 @@ class ModelIncome extends Model
 			SUM(payable_amount) as monto FROM selling_info as si 
 			RIGHT JOIN selling_price as sp on sp.invoice_id=si.invoice_id 
 			WHERE  {$where_query} 
-			GROUP BY pmethod_id having tipo_pago!=''");
+			GROUP BY pmethod_id");
 		$statement->execute(array());
 		$row = $statement->fetchAll(PDO::FETCH_ASSOC);
 		$income = count($row)>0 ? $row : array();

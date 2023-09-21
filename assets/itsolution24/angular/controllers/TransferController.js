@@ -224,10 +224,12 @@ function (
     });
 
     $scope.showStockList = function(toStoreID) {
+        toStoreID = (typeof toStoreID!='undefined') ? toStoreID : 1;
         $scope.productsArray = [];  
         $scope.transferProductArray = [];      
+        $scope.searchTerm=$('#searchTerm').val()
         $http({
-            url: window.baseUrl + "/_inc/ajax.php?type=STOCKITEMS&store_id="+toStoreID,
+            url: window.baseUrl + "/_inc/ajax.php?type=STOCKITEMS&store_id="+toStoreID+'&searchTerm='+$scope.searchTerm,
             method: "GET",
             data: "",
             cache: false,

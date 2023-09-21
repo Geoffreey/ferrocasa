@@ -504,6 +504,7 @@ function get_postemplate_data($invoice_id)
       'customer_address' => '',
       'customer_phone' => $invoice_info['customer_mobile'] ? $invoice_info['customer_mobile'] : $invoice_info['mobile_number'],
       'customer_email' => $invoice_info['customer_email'],
+      'customer_nit' => $invoice_info['customer_nit'],
       'customer_contact' => $customer_contact,
       'gtin' => get_the_customer($invoice_info['customer_id'],'gtin'),
       'total_items' => $invoice_info['total_items'],

@@ -215,8 +215,8 @@ function (
             if ($scope.totalProduct == 1 && productCode) {
                 window.angular.forEach(response.data.products, function(productItem, key) {
                   if (productItem) {
-                    $scope.addItemToInvoice(productItem.p_code);
-                    $scope.productName = '';
+                    //$scope.addItemToInvoice(productItem.p_code);
+                    //$scope.productName = '';
                   }
                 });
             };
@@ -368,8 +368,7 @@ function (
         if ($scope.discountType == 'percentage') {
             discountPercentage =  parseFloat($scope._percentage($scope.payable, $scope.discountAmount));
         } else {
-            discountPercentage =  parseFloat($scope._percentage($scope.payable, $scope.discountAmount));
-            //discountPercentage =  parseFloat($scope.discountAmount);
+            discountPercentage =  parseFloat($scope.discountAmount);
         }
 
         if ($scope.shippingType == 'percentage') {

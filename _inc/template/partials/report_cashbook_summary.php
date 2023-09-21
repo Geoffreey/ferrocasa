@@ -15,9 +15,9 @@
       foreach ($today_income['group'] as &$valor) {
       ?>
       <tr>
-        <td class="w-50 bg-brown text-right">
+        <td class="w-50 bg-gray text-right">
            <?= $valor['tipo_pago']; ?></td>
-        <td class="w-50 bg-brown text-right">
+        <td class="w-50 bg-gray text-right">
           <?= currency_format($valor['monto']); ?>
         </td>
       </tr>
@@ -67,7 +67,14 @@
           echo currency_format($cash_in_hand);?>
         </td>
       </tr>
-
+      <tr class="bg-blue">
+        <td class="w-50 text-right"><?php echo trans('label_pmethod'); ?> / <?php echo trans('label_pmethod'); ?></td>
+        <td class="w-50 text-right">
+          <?php 
+          $pago_con_tarjeta = $total_income-$total_expense;
+          echo currency_format($pago_con_tarjeta);?>
+        </td>
+      </tr>
       <tr class="bg-yellow">
         <td class="w-50 text-right"><h4><b><?php echo trans('label_today_closing_balance'); ?></b></h4></td>
         <td class="w-50 text-right"><h4><b><?php echo currency_format($cash_in_hand);?></b></h4></td>

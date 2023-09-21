@@ -85,7 +85,7 @@
           <b><i><?php echo trans('text_stock_list'); ?></i></b>
         </h4>
         <div class="filter-searchbox">
-            <input ng-model="search_list" class="form-control" type="text" placeholder="<?php echo trans('search'); ?>">
+            <input ng-model="search_list" id="searchTerm" ng-change="showStockList();" class="form-control" type="text" placeholder="<?php echo trans('search'); ?>">
         </div>
         <div class="well well-sm product-well">
           <div filter-list="search_list">
@@ -113,7 +113,7 @@
           <table class="table table-striped table-bordered">
             <tbody>
                 <tr class="info" ng-repeat="transferItem in transferItemArray">
-                  <td class="w-45" >{{ transferItem.item_name }}</td>
+                  <td class="w-45" style="">{{ transferItem.item_name }}</td>
                   <td class="w-25 text-center">{{ transferItem.invoice_id }}</td>
                   <td class="w-25 text-center">
                     <input id="id-{{ transferItem.id }}" type="hidden" name="items[{{ transferItem.id }}][id]" value="{{ transferItem.id }}">
