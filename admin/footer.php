@@ -28,7 +28,7 @@
             <?php echo trans('text_version'); ?>
             <?php echo settings('version'); ?>
     	</div>
-    	<div class="copyright"> <a href="https://ventas.programacionparacompartir.com/">SISTEMAS Y CODIGO FUENTE AQUI</a></div>
+    	<div class="copyright"> <a href="https://wa.link/zutrtn">Soporte tecnico</a></div>
     </footer>
 </div>
 <!-- Envoltura final -->
