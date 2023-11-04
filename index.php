@@ -346,7 +346,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && $request->get['action_type']
       <?php endif; ?>
     </div>
     <div class="copyright text-center">
-      <p>&copy; <a href="https://wa.link/gas26m">Servicio tecnico</a>, </p>
+      <p>&copy; <a href="https://soporte.geoffdeep.pw/">SOPORTE TECNICO</a>, </p>
     </div>
   </section>
 

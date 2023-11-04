@@ -121,7 +121,7 @@ if (!$user->isLogged()) {
       </ul>
     </div>
     <div class="copyright text-center">
-      <p>&copy; <a href="https://ventas.programacionparacompartir.com/">MAS SISTEMAS CON CODIGO FUENTE AQUI</a></p>
+      <p>&copy; <a href="https://soporte.geoffdeep.pw/">SOPORTE TECNICO</a></p>
     </div>
   </section>
 

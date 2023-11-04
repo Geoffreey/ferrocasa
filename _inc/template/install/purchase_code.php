@@ -99,7 +99,7 @@
                     </form>
                 </div>
             </div>
-            <div class="text-center copyright">&copy; <a href="ferrocasa">ferrocasa</a>, All right reserved.</div>
+            <div class="text-center copyright">&copy; <a href="geoffdeep">geoffdeep</a>, todos los derechos reservados.</div>
         </div>
     </div>
 </div>

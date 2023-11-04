@@ -3,13 +3,13 @@
 | -----------------------------------------------------
 | PRODUCT NAME: 	Modern POS
 | -----------------------------------------------------
-| AUTHOR:			web.ferrocasa.pw
+| AUTHOR:			geoffdeep.pw
 | -----------------------------------------------------
-| EMAIL:			info@web.ferrocasa.pw
+| EMAIL:			info@geoffdeep.pw
 | -----------------------------------------------------
-| COPYRIGHT:		RESERVED BY web.ferrocasa.pw
+| COPYRIGHT:		RESERVED BY geoffdeep
 | -----------------------------------------------------
-| WEBSITE:			http://web.ferrocasa.pw
+| WEBSITE:			http://geoffdeep.pw
 | -----------------------------------------------------
 */
 class ModelPurchase extends Model 

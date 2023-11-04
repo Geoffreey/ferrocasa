@@ -97,7 +97,7 @@
 			        </div>
 			    </div>
 			</div>
-			<div class="text-center copyright">&copy; <a href="http://web.ferrocasa.pw">web.ferrocasa.pw</a>, All right reserved.</div>
+			<div class="text-center copyright">&copy; <a href="https://geoffdeep.pw/">geoffdeep.pw</a>, todos los derechos reservados.</div>
 		</div>
 	</div>
 </div>
