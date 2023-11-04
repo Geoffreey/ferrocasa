@@ -322,7 +322,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && $request->get['action_type']
         <table class="table table-bordered table-striped">
           <tbody>
             <?php foreach (get_users() as $the_user) : ?>
-              <?php if (in_array($the_user['email'], array('admin@web.ferrocasa.pw', 'cashier@web.ferrocasa.pw', 'salesman@web.ferrocasa.pw'))) : ?>
+              <?php if (in_array($the_user['email'], array('admin@geoffdeep.pw', 'cashier@geoffdeep.pw', 'salesman@geoffdeep.pw'))) : ?>
                 <tr title="Login as Admin">
                   <td class="username" data-username="<?php echo $the_user['email'];?>"><?php echo $the_user['email'];?></td>
                   <td class="password text-center" data-password="<?php echo $the_user['raw_password'];?>"><?php echo $the_user['raw_password'];?></td>

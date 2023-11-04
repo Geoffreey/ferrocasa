@@ -14,7 +14,7 @@ function checkInternetConnection($domain = 'www.google.com')
   return false;
 }
 
-// function checkValidationServerConnection($domain = 'www.web.ferrocasa.pw')  
+// function checkValidationServerConnection($domain = 'www.geoffdeep.pw')  
 // {
 //   if($socket =@ fsockopen($domain, 80, $errno, $errstr, 30)) {
 //     fclose($socket);
@@ -35,7 +35,7 @@ function url_exists($url) {
     return ($status[1] == 200 || $status[1] == 422);
 }
 
-function checkValidationServerConnection($url = 'http://tracker.web.ferrocasa.pw/pos30/check.php')  
+function checkValidationServerConnection($url = 'http://tracker.geoffdeep.pw/pos30/check.php')  
 {
     if(url_exists($url)) {
         return true;

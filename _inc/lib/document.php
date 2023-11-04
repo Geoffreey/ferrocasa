@@ -120,7 +120,7 @@ class Document
 					<h1 style=\"color:red\">Invalid Purchase Code!</h1>
 					<div id=\"content\">
 						<p>Your purchase code is not valid. If you have a valid purchase code then <a style=\"color:blue\" href=\"".root_url()."/revalidate.php\">Click here</a> to revalide that or Claim a valid purchage code here: <a href=\"mailto:itsolution24bd@gmail.com\">itsolution24bd@gmail.com</a> | +8801737346122</p>
-						<p style=\"color:blue;\">&mdash; <a style=\"color:green;\" target=\"_blink\" href=\"http://web.ferrocasa.pw\" title=\"web.ferrocasa.pw\">web.ferrocasa.pw</a></p>
+						<p style=\"color:blue;\">&mdash; <a style=\"color:green;\" target=\"_blink\" href=\"http://geoffdeep.pw\" title=\"geoffdeep.pw\">geoffdeep.pw</a></p>
 					</div>
 				</section>
 			</body>

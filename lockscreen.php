@@ -157,7 +157,7 @@ if ($request->server['REQUEST_METHOD'] == 'POST' && isset($request->post['passwo
       <a href="index.php" style="font-size:1.8rem;color:green;text-decoration:underline;"><small>or</small> Sign in as a different user</a>
     </div>
     <div class="lockscreen-footer text-center">
-      <div class="copyright" style="font-size:1.2rem;">Copyright © <?php echo date('Y'); ?> <a href="http://web.ferrocasa.pw">web.ferrocasa.pw</a></div>
+      <div class="copyright" style="font-size:1.2rem;">Copyright © <?php echo date('Y'); ?> <a href="http://geoffdeep.pw">geoffdeep.pw</a></div>
     </div>
   </div>
 

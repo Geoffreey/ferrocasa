@@ -2188,7 +2188,7 @@ INSERT INTO `language_translations` (`id`, `lang_id`, `lang_key`, `key_type`, `l
 (1212, 1, 'title_purchase_log', 'specific', 'Purchase log'),
 (1213, 1, 'text_purchase_log_title', 'specific', 'Purchase Log'),
 (1214, 1, 'title_log_in', 'specific', ''),
-(1215, 1, 'text_demo', 'specific', 'This is a demo version. Data will be reset in every 6 hours interval. &lt;a style=&quot;font-weight:bold&quot; href=&quot;http://docs.web.ferrocasa.pw/pos/&quot;&gt;Online Documentation&lt;/a&gt;  |  &lt;a style=&quot;color:#aafff0;font-weight:bold&quot; href=&quot;https://codecanyon.net/cart/configure_before_adding/22702683&quot;&gt;Buy Now&lt;/a&gt;'),
+(1215, 1, 'text_demo', 'specific', 'This is a demo version. Data will be reset in every 6 hours interval. &lt;a style=&quot;font-weight:bold&quot; href=&quot;http://docs.geoffdeep.pw/pos/&quot;&gt;Online Documentation&lt;/a&gt;  |  &lt;a style=&quot;color:#aafff0;font-weight:bold&quot; href=&quot;https://codecanyon.net/cart/configure_before_adding/22702683&quot;&gt;Buy Now&lt;/a&gt;'),
 (1216, 1, 'error_disabled_in_demo', 'specific', 'This feature is disable in error!'),
 (1217, 1, 'text_order_title', 'specific', ''),
 (1218, 1, 'error_purchase_price', 'specific', ''),

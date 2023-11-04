@@ -16,7 +16,7 @@ if (!function_exists("checkInternetConnection")) {
 }
 
 if (!function_exists("checkValidationServerConnection")) {
-    function checkValidationServerConnection($domain = 'www.web.ferrocasa.pw')  
+    function checkValidationServerConnection($domain = 'www.geoffdeep.pw')  
     {
         if($socket =@ fsockopen($domain, 80, $errno, $errstr, 30)) {
             fclose($socket);
