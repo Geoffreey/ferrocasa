@@ -77,14 +77,7 @@ include ("left_sidebar.php") ;
             <div class="table-responsive"> 
               <?php
               $hide_colums = "";
-              //if (user_group_id() !=1){
-                //if (! has_permission('access', 'update_sell_invoice_info')) {
-                 // $hide_colums .= "5,";
-                //}
-                //if (! has_permission('access', 'delete_sell_invoice')) {
-                  //$hide_colums .= "6,";
-                //}
-              //}
+          
               ?>  
               <table id="invoice-invoice-list"  class="table table-bordered table-striped table-hover" data-hide-colums="<?php echo $hide_colums; ?>">
                 <thead>
