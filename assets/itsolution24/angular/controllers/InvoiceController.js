@@ -182,13 +182,13 @@ window.angularApp.controller("InvoiceController", [
         };
         // Total over all pages at column 6
         pageTotal = api
-        .column( 6, { page: "current"} )
+        .column( 3, { page: "current"} )
         .data()
         .reduce( function (a, b) {
             return intVal(a) + intVal(b);
         }, 0 );
     // Actualizar pie de página
-    $( api.column( 6 ).footer() ).html(
+    $( api.column( 3 ).footer() ).html(
         window.formatDecimal(pageTotal, 2)
     );
       },
