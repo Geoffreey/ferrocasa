@@ -461,7 +461,7 @@ if (isset($request->get['customer_id']) && ($request->get['customer_id'] != 'und
 }
 
 // tabla de base de datos a utilizar
-$table = "(SELECT selling_info.* FROM `selling_info` WHERE {$where_query}) as selling_info";
+$table = "(SELECT selling_info.*, (select sum((item_price*item_quantity)-(((item_price*item_quantity)*item_discount)/100)) from selling_item  where invoice_id=selling_info.invoice_id) as amount, (select name from pmethods where pmethod_id=selling_info.pmethod_id) as pmethod FROM `selling_info` WHERE {$where_query}) as selling_info";
 
 // Llave principal de la tabla
 $primaryKey = 'info_id';
