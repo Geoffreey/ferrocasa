@@ -491,8 +491,7 @@ $columns = array(
       'db' => 'created_at',   
       'dt' => 'created_at' ,
       'formatter' => function($d, $row) {
-         $date = new DateTimeImmutable($row['created_at']);
-        return $date->format('d-m-Y H:i:s');
+        return $row['created_at'];
       }
     ),
     array(
@@ -501,7 +500,7 @@ $columns = array(
         'formatter' => function( $d, $row) {
             $customer = get_the_customer($row['customer_id']);
 			if (isset($customer['customer_id'])) {
-				return '<a href="customer_profile.php?customer_id=' . $customer['customer_id'] . '">' . $customer['customer_name'] . ' - ' . $customer['customer_mobile'] . '</a>';
+				return '<a href="customer_profile.php?customer_id=' . $customer['customer_id'] . '">' . $customer['customer_name'] . '</a>';
 			}
 			return '';
         }
@@ -517,13 +516,6 @@ $columns = array(
 
             return;
         }
-    ),
-    array( 
-      'db' => 'amount',   
-      'dt' => 'amount',
-      'formatter' => function($d, $row) {
-        return currency_format($row['amount']);
-      }
     ),
     array( 'db' => 'payment_status', 'dt' => 'payment_status' ),
     array( 'db' => 'is_installment', 'dt' => 'is_installment' ),
