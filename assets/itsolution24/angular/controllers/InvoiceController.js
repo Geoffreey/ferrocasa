@@ -180,6 +180,17 @@ window.angularApp.controller("InvoiceController", [
             ? i
             : 0;
         };
+        // Total over all pages at column 6
+        pageTotal = api
+        .column( 6, { page: "current"} )
+        .data()
+        .reduce( function (a, b) {
+            return intVal(a) + intVal(b);
+        }, 0 );
+    // Actualizar pie de página
+    $( api.column( 6 ).footer() ).html(
+        window.formatDecimal(pageTotal, 2)
+    );
       },
       pageLength: window.settings.datatable_item_limit,
       buttons: [
