@@ -174,9 +174,6 @@ include ("left_sidebar.php");
 							        <th class="w-20">
 							        	<?php echo trans('label_customer_name'); ?>
 							        </th>
-									<th class="w-7">
-							        	Monto
-							        </th>
 							        <th class="w-7">
 							        	<?php echo trans('label_status'); ?>
 							        </th>
@@ -207,9 +204,6 @@ include ("left_sidebar.php");
 							        </th>
 							        <th class="w-20">
 							        	<?php echo trans('label_customer_name'); ?>
-							        </th>
-									<th class="w-7">
-							        	Monto
 							        </th>
 							        <th class="w-7">
 							        	<?php echo trans('label_status'); ?>
