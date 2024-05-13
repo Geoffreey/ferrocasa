@@ -145,19 +145,19 @@ include ("left_sidebar.php");
 				            $hide_colums = "";
 				            if (user_group_id() != 1) {
 				            	if (! has_permission('access', 'sell_payment')) {
-				                $hide_colums .= "5,";
+				                $hide_colums .= "4,";
 				              }
 				              if (! has_permission('access', 'create_sell_return')) {
-				                $hide_colums .= "6,";
+				                $hide_colums .= "5,";
 				              }
 				               if (! has_permission('access', 'read_sell_invoice')) {
-				                $hide_colums .= "7,";
+				                $hide_colums .= "6,";
 				              }
 				              if (! has_permission('access', 'update_sell_invoice_info')) {
-				                $hide_colums .= "8,";
+				                $hide_colums .= "7,";
 				              }
 				              if (! has_permission('access', 'delete_sell_invoice')) {
-				                $hide_colums .= "9,";
+				                $hide_colums .= "8,";
 				              }
 				            }
 				          ?>  

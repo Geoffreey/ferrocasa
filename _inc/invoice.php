@@ -461,7 +461,7 @@ if (isset($request->get['customer_id']) && ($request->get['customer_id'] != 'und
 }
 
 // tabla de base de datos a utilizar
-$table = "(SELECT selling_info.*, (select sum((item_price*item_quantity)-(((item_price*item_quantity)*item_discount)/100)) from selling_item  where invoice_id=selling_info.invoice_id) as amount, (select name from pmethods where pmethod_id=selling_info.pmethod_id) as pmethod FROM `selling_info` WHERE {$where_query}) as selling_info";
+$table = "(SELECT selling_info.* FROM `selling_info` WHERE {$where_query}) as selling_info";
 
 // Llave principal de la tabla
 $primaryKey = 'info_id';
@@ -491,8 +491,7 @@ $columns = array(
       'db' => 'created_at',   
       'dt' => 'created_at' ,
       'formatter' => function($d, $row) {
-         $date = new DateTimeImmutable($row['created_at']);
-        return $date->format('d-m-Y H:i:s');
+        return $row['created_at'];
       }
     ),
     array(
@@ -501,7 +500,7 @@ $columns = array(
         'formatter' => function( $d, $row) {
             $customer = get_the_customer($row['customer_id']);
 			if (isset($customer['customer_id'])) {
-				return '<a href="customer_profile.php?customer_id=' . $customer['customer_id'] . '">' . $customer['customer_name'] . ' - ' . $customer['customer_mobile'] . '</a>';
+				return '<a href="customer_profile.php?customer_id=' . $customer['customer_id'] . '">' . $customer['customer_name'] . '</a>';
 			}
 			return '';
         }
@@ -517,13 +516,6 @@ $columns = array(
 
             return;
         }
-    ),
-    array( 
-      'db' => 'amount',   
-      'dt' => 'amount',
-      'formatter' => function($d, $row) {
-        return currency_format($row['amount']);
-      }
     ),
     array( 'db' => 'payment_status', 'dt' => 'payment_status' ),
     array( 'db' => 'is_installment', 'dt' => 'is_installment' ),
