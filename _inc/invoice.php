@@ -2,6 +2,7 @@
 ob_start();
 session_start();
 include ("../_init.php");
+ini_set("display_errors", 0);
 
 // Comprobar si el usuario inició sesión o no
 // If user is not logged in then return an alert message
