@@ -3,9 +3,9 @@ define('INSTALLED', true);
 
 	$sql_details = array(
 'host' => 'localhost',
-'db' => 'pos_moderno',
-'user' => 'root',
-'pass' => '',
+'db' => 'systccbx_ferrocasa',
+'user' => 'systccbx_postrons',
+'pass' => 'P0str0ns$',
 'port' => '3306'
 	);
 
@@ -84,7 +84,7 @@ define('INSTALLED', true);
 	 *ACTIVAR/DESACTIVAR EL SISTEMA DE ENGANCHE
 	 * --------------------------------------------------------------------
 	 */
-	define('HOOK', 1);
+	define('HOOK', 0);
 
 
 	/*
@@ -102,14 +102,14 @@ define('INSTALLED', true);
 	 * SUSPENDER LA CUENTA DE USUARIO DURANTE UN PERÍODO ESPECÍFICO, SI SE PRODUJERON ERRORES EN LOS INTENTOS DE INICIO DE SESIÓN
 	 *-----------------------------------------------------------------------------
 	 */
-	define('TOTAL_LOGIN_TRY', 10);
+	define('TOTAL_LOGIN_TRY', 120);
 
 	/*
 	 * --------------------------------------------------------------------
 	 * SI LA CUENTA ESTÁ BLOQUEADA, DESBLOQUEE DESPUÉS DEL TIEMPO ESPECIFICADO (MINUTOS)
 	 *---------------------------------------------------------------------
 	 */
-	define('UNLOCK_ACCOUNT_AFTER', 10);
+	define('UNLOCK_ACCOUNT_AFTER', 120);
 
 	/*
 	 * --------------------------------------------------------------------

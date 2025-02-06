@@ -272,6 +272,7 @@ $("#salesman_id").on('select2:selecting', function(e) {
     $scope.salesmanId = salesmanId;
 });
 
+
     // ===============================================
     // End Product list
     // ===============================================
